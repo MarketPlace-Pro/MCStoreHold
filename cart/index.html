@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Marketplace Pro</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><a href="../index.html">Marketplace Pro</a></h1>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../products/">Products</a>
+                <a href="index.html">Cart</a>
+                <a href="../account/login.html">Account</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <div id="cartPageContent">
+            <!-- Cart content will be loaded here -->
+        </div>
+    </div>
+
+    <script src="../js/data/products.js"></script>
+    <script src="../js/modules/cartManager.js"></script>
+    <script src="../js/modules/apiClient.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            cartManager.renderCartItems();
+        });
+    </script>
+</body>
+</html>
