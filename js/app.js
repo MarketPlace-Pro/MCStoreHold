@@ -75,3 +75,32 @@ class MarketplaceApp {
 document.addEventListener('DOMContentLoaded', () => {
     window.marketplaceApp = new MarketplaceApp();
 });
+
+// Mobile optimization for product display
+function optimizeForMobile() {
+    const isMobile = window.innerWidth <= 768;
+    const productGrid = document.getElementById('productsGrid');
+    
+    if (isMobile && productGrid) {
+        // Add mobile-specific class
+        productGrid.classList.add('mobile-view');
+        
+        // Optimize images for mobile
+        const productImages = productGrid.querySelectorAll('img');
+        productImages.forEach(img => {
+            img.loading = 'lazy';
+            img.setAttribute('data-src', img.src);
+        });
+    }
+}
+
+// Run on load and resize
+window.addEventListener('load', optimizeForMobile);
+window.addEventListener('resize', optimizeForMobile);
+
+// Add touch improvements for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+    }
+});
