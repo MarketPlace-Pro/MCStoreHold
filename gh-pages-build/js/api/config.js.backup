@@ -1,0 +1,51 @@
+const API_CONFIG = {
+    BASE_URL: 'http://localhost:3000/api',
+    ENDPOINTS: {
+        PRODUCTS: '/products',
+        PRODUCT_BY_ID: '/products/:id',
+        PRODUCTS_BY_CATEGORY: '/products/category/:category'
+    },
+
+    // API methods
+    async request(endpoint, options = {}) {
+        const url = `${this.BASE_URL}${endpoint}`;
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                ...options
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data.data || data; // Handle our JSON response format
+        } catch (error) {
+            console.error('API request failed:', error);
+            throw error;
+        }
+    },
+
+    // Product methods
+    async getAllProducts() {
+        const response = await this.request(this.ENDPOINTS.PRODUCTS);
+        return response.products || response;
+    },
+
+    async getProductById(id) {
+        const response = await this.request(this.ENDPOINTS.PRODUCTS + '/' + id);
+        return response.product || response;
+    },
+
+    async getProductsByCategory(category) {
+        const response = await this.request(`${this.ENDPOINTS.PRODUCTS}/category/${category}`);
+        return response.products || response;
+    }
+};
+
+// Make it globally available
+window.API_CONFIG = API_CONFIG;
