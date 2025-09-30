@@ -381,3 +381,75 @@ body {
 
 /* Ensure viewport meta tag works */
 /* Make sure your HTML has: <meta name="viewport" content="width=device-width, initial-scale=1.0"> */
+
+/* ===== MOBILE FIXES FOR PRODUCT GRID ===== */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+        padding: 10px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    
+    .product-card {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px !important;
+        box-sizing: border-box;
+    }
+    
+    .product-card img {
+        max-width: 100% !important;
+        height: auto !important;
+        width: 100% !important;
+    }
+    
+    .add-to-cart-btn {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 14px !important;
+        margin: 8px 0 !important;
+    }
+    
+    .product-card h3 {
+        font-size: 16px !important;
+        line-height: 1.3;
+        margin: 8px 0 !important;
+    }
+    
+    .price {
+        font-size: 18px !important;
+        margin: 8px 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        padding: 5px !important;
+    }
+    
+    .product-card {
+        padding: 12px !important;
+    }
+}
+
+/* Container fixes for mobile */
+@media (max-width: 768px) {
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+    }
+    
+    body {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+}
