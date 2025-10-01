@@ -1,77 +1,87 @@
-// Main application logic
-class MarketplaceApp {
-    constructor() {
-        this.init();
+// Sample product data
+const featuredProducts = [
+    {
+        id: 1,
+        name: "Epic Texture Pack",
+        price: "$4.99",
+        image: "https://via.placeholder.com/200x200/2c5aa0/ffffff?text=Texture+Pack",
+        description: "High-quality HD textures"
+    },
+    {
+        id: 2,
+        name: "Adventure Map",
+        price: "$7.99",
+        image: "https://via.placeholder.com/200x200/27ae60/ffffff?text=Adventure+Map",
+        description: "Epic custom adventure"
+    },
+    {
+        id: 3,
+        name: "Skin Pack",
+        price: "$2.99",
+        image: "https://via.placeholder.com/200x200/e74c3c/ffffff?text=Skin+Pack",
+        description: "20+ character skins"
+    },
+    {
+        id: 4,
+        name: "Mod Collection",
+        price: "$9.99",
+        image: "https://via.placeholder.com/200x200/f39c12/ffffff?text=Mod+Pack",
+        description: "Game-enhancing mods"
     }
+];
 
-    async init() {
-        try {
-            // Load products and display them
-            const products = await productLoader.loadProducts();
-            this.displayProducts(products);
-        } catch (error) {
-            console.error('Failed to initialize app:', error);
-            this.showError('Failed to load products. Please refresh the page.');
-        }
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('MCStoreHold initialized');
+    loadProducts();
+});
+
+// Load products into the grid
+function loadProducts() {
+    const productsGrid = document.getElementById('productsGrid');
+    const loading = document.getElementById('loading');
+    
+    if (!productsGrid) {
+        console.error('Products grid not found!');
+        return;
     }
-
-    displayProducts(products) {
-        const productsGrid = document.getElementById('productsGrid');
-        
-        if (!productsGrid) {
-            console.error('Products grid element not found');
-            return;
-        }
-
-        if (!products || products.length === 0) {
-            productsGrid.innerHTML = '<div class="no-products">No products available</div>';
-            return;
-        }
-
-        // Display first 6 products as featured
-        const featuredProducts = products.slice(0, 6);
-        
-        productsGrid.innerHTML = featuredProducts.map(product => `
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="${product.image || 'images/placeholder.jpg'}" alt="${product.name}" 
-                         onerror="this.src='images/placeholder.jpg'">
-                    ${!product.inStock ? '<span class="out-of-stock">Out of Stock</span>' : ''}
-                </div>
-                <div class="product-info">
-                    <h4 class="product-title">${product.name}</h4>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-price">$${product.price}</div>
-                    <button class="add-to-cart-btn" 
-                            ${!product.inStock ? 'disabled' : ''}
-                            onclick="marketplaceApp.addToCart(${product.id})">
-                        ${product.inStock ? 'Add to Cart' : 'Out of Stock'}
-                    </button>
-                </div>
-            </div>
-        `).join('');
+    
+    // Remove loading message
+    if (loading) {
+        loading.style.display = 'none';
     }
+    
+    // Create product cards
+    const productsHTML = featuredProducts.map(product => `
+        <div class="product-card" data-product-id="${product.id}">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <h3>${product.name}</h3>
+            <div class="price">${product.price}</div>
+            <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                Add to Cart
+            </button>
+        </div>
+    `).join('');
+    
+    productsGrid.innerHTML = productsHTML;
+    console.log('Products loaded successfully');
+}
 
-    async addToCart(productId) {
-        try {
-            const product = await productLoader.getProductById(productId);
-            // For now, just show an alert - we'll implement cart functionality later
-            alert(`Added ${product.name} to cart!`);
-        } catch (error) {
-            console.error('Failed to add to cart:', error);
-            alert('Failed to add product to cart. Please try again.');
-        }
-    }
-
-    showError(message) {
-        const productsGrid = document.getElementById('productsGrid');
-        if (productsGrid) {
-            productsGrid.innerHTML = `<div class="error-message">${message}</div>`;
-        }
+// Simple cart function
+function addToCart(productId) {
+    const product = featuredProducts.find(p => p.id === productId);
+    if (product) {
+        alert(`Added ${product.name} to cart!`);
+        console.log(`Added to cart: ${product.name}`);
     }
 }
 
-// Initialize the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.marketplaceApp = new MarketplaceApp();
+// Error handling for images
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName === 'IMG') {
+            console.log('Image failed to load:', e.target.src);
+            e.target.src = 'https://via.placeholder.com/200x200/cccccc/666666?text=Image+Not+Found';
+        }
+    }, true);
 });
