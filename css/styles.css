@@ -75,166 +75,9 @@ main {
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     border: 1px solid rgba(255,255,255,0.2);
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-}
-
-.product-image {
-    width: 100%;
-    height: 160px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
-.product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #333;
-    line-height: 1.4;
-}
-
-.price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #2c5aa0;
-    margin-bottom: 15px;
-}
-
-.add-to-cart-btn {
-    background: linear-gradient(135deg, #2c5aa0, #1e3d6f);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    width: 100%;
-    transition: all 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-    background: linear-gradient(135deg, #1e3d6f, #152a4d);
-    transform: scale(1.02);
-}
-
-/* ===== FOOTER ===== */
-footer {
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: auto;
-}
-
-/* ===== TABLET STYLES ===== */
-@media (min-width: 768px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-        padding: 20px;
-    }
-    
-    header h1 {
-        font-size: 2.5rem;
-    }
-    
-    .product-card {
-        padding: 25px;
-    }
-    
-    .product-image {
-        height: 180px;
-    }
-}
-
-/* ===== DESKTOP STYLES
-
-cd ~/MCStoreHold
-
-# Update CSS to ensure products display properly
-cat > css/styles.css << 'CSS'
-/* ===== RESET & BASE STYLES ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 0;
-    margin: 0;
-}
-
-.container {
-    max-width: 100%;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-/* ===== HEADER ===== */
-header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-}
-
-header h1 {
-    color: #2c5aa0;
-    font-size: 2rem;
-    margin-bottom: 5px;
-}
-
-header p {
-    color: #666;
-    font-size: 1.1rem;
-}
-
-/* ===== MAIN CONTENT ===== */
-main {
-    flex: 1;
-    padding: 20px;
-    width: 100%;
-}
-
-/* ===== LOADING ===== */
-.loading {
-    text-align: center;
-    color: white;
-    font-size: 1.2rem;
-    padding: 40px;
-}
-
-/* ===== PRODUCT GRID ===== */
-.product-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-/* ===== PRODUCT CARD ===== */
-.product-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
+    height: 100%;
 }
 
 .product-card:hover {
@@ -244,21 +87,31 @@ main {
 
 .product-image {
     width: 100%;
-    height: 160px;
-    object-fit: contain;
+    height: 200px;
+    object-fit: cover;
     margin-bottom: 15px;
     border-radius: 10px;
+    border: 2px solid #f0f0f0;
 }
 
 .product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
     color: #333;
     line-height: 1.4;
+    min-height: auto;
+}
+
+.product-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    flex-grow: 1;
 }
 
 .price {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #2c5aa0;
     margin-bottom: 15px;
@@ -275,6 +128,7 @@ main {
     font-weight: 600;
     width: 100%;
     transition: all 0.3s ease;
+    margin-top: auto;
 }
 
 .add-to-cart-btn:hover {
@@ -308,7 +162,7 @@ footer {
     }
     
     .product-image {
-        height: 180px;
+        height: 220px;
     }
 }
 
@@ -321,5 +175,9 @@ footer {
     
     main {
         padding: 40px 20px;
+    }
+    
+    .product-image {
+        height: 200px;
     }
 }
