@@ -4,42 +4,42 @@ const featuredProducts = [
         id: 1,
         name: "Wireless Bluetooth Headphones",
         price: "$79.99",
-        image: "images/headphones.jpg",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop",
         category: "electronics"
     },
     {
         id: 2,
         name: "Smart Fitness Watch",
         price: "$199.99",
-        image: "images/smartwatch.jpg",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop",
         category: "electronics"
     },
     {
         id: 3,
         name: "Organic Cotton T-Shirt",
         price: "$29.99",
-        image: "images/tshirt.jpg",
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop",
         category: "clothing"
     },
     {
         id: 4,
         name: "Stainless Steel Water Bottle",
         price: "$24.99",
-        image: "images/waterbottle.jpg",
+        image: "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=300&h=300&fit=crop",
         category: "lifestyle"
     },
     {
         id: 5,
         name: "Professional Camera",
         price: "$899.99",
-        image: "images/camera.jpg",
+        image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=300&h=300&fit=crop",
         category: "electronics"
     },
     {
         id: 6,
         name: "Designer Backpack",
         price: "$59.99",
-        image: "images/backpack.jpg",
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop",
         category: "accessories"
     }
 ];
@@ -47,6 +47,7 @@ const featuredProducts = [
 // Initialize the store when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     loadFeaturedProducts();
+    setupSearch();
 });
 
 // Load featured products
@@ -60,7 +61,7 @@ function loadFeaturedProducts() {
 
     const productsHTML = featuredProducts.map(product => `
         <div class="product-card">
-            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x300?text=Product+Image'">
+            <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p class="price">${product.price}</p>
             <button class="add-to-cart-btn" onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', '${product.price}', '${product.image}')">
@@ -92,9 +93,3 @@ function setupSearch() {
         });
     }
 }
-
-// Initialize search when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    loadFeaturedProducts();
-    setupSearch();
-});

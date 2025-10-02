@@ -2,7 +2,6 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function addToCart(productId, productName, productPrice, productImage) {
-    // Simple cart add function
     cart.push({
         id: productId,
         name: productName,
@@ -11,8 +10,8 @@ function addToCart(productId, productName, productPrice, productImage) {
     });
     
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(productName + ' added to cart!');
     updateCartCount();
+    alert(productName + ' added to cart!');
 }
 
 function updateCartCount() {
@@ -23,13 +22,13 @@ function updateCartCount() {
     }
 }
 
-// Initialize cart count when page loads
-document.addEventListener('DOMContentLoaded', updateCartCount);
-
 function showCart() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
     } else {
-        alert('You have ' + cart.length + ' items in your cart!');
+        alert('You have ' + cart.length + ' item(s) in your cart!');
     }
 }
+
+// Initialize cart count when page loads
+document.addEventListener('DOMContentLoaded', updateCartCount);
