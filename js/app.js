@@ -72,3 +72,29 @@ function loadFeaturedProducts() {
     productsGrid.innerHTML = productsHTML;
     console.log('Products loaded successfully');
 }
+
+// Search functionality
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+}
+
+// Initialize search when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadFeaturedProducts();
+    setupSearch();
+});
