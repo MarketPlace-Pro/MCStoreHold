@@ -25,3 +25,11 @@ function updateCartCount() {
 
 // Initialize cart count when page loads
 document.addEventListener('DOMContentLoaded', updateCartCount);
+
+function showCart() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+    } else {
+        alert('You have ' + cart.length + ' items in your cart!');
+    }
+}
