@@ -56,3 +56,25 @@ const EcommerceUtils = {
         });
     }
 };
+
+// Compact header on scroll
+function initCompactHeader() {
+    const header = document.querySelector('header');
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.style.padding = '0.3rem 0';
+            header.style.background = 'rgba(44, 90, 160, 0.95)';
+        } else {
+            header.style.padding = '0.5rem 0';
+            header.style.background = '#2c5aa0';
+        }
+        lastScrollY = window.scrollY;
+    });
+}
+
+// Initialize compact header
+document.addEventListener('DOMContentLoaded', function() {
+    initCompactHeader();
+});

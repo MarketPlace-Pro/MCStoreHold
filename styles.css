@@ -1872,3 +1872,102 @@ footer {
     margin-bottom: 0.5rem;
     color: #2c3e50;
 }
+/* ===== COMPACT HEADER FIXES ===== */
+header {
+    padding: 0.5rem 0 !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    padding: 0 !important;
+    gap: 15px !important;
+}
+
+.logo h1 {
+    font-size: 1.5rem !important;
+    margin: 0 !important;
+}
+
+.main-nav ul {
+    gap: 1rem !important;
+    margin: 0 !important;
+}
+
+.main-nav a {
+    font-size: 0.9rem !important;
+    padding: 0.3rem 0.8rem !important;
+}
+
+.header-actions {
+    gap: 0.8rem !important;
+}
+
+.search-box {
+    min-width: 200px !important;
+}
+
+.search-box input {
+    padding: 6px 12px !important;
+    font-size: 0.9rem !important;
+}
+
+.search-box button {
+    padding: 6px 12px !important;
+}
+
+.user-actions a {
+    padding: 6px 10px !important;
+    font-size: 0.9rem !important;
+}
+
+.cart-icon {
+    padding-right: 0 !important;
+}
+
+/* Mobile fixes for compact header */
+@media (max-width: 768px) {
+    header {
+        padding: 0.5rem 0 !important;
+    }
+    
+    .header-content {
+        gap: 10px !important;
+        padding: 0 10px !important;
+    }
+    
+    .logo h1 {
+        font-size: 1.3rem !important;
+    }
+    
+    .search-box {
+        min-width: 150px !important;
+    }
+    
+    .search-box input {
+        padding: 5px 10px !important;
+    }
+}
+
+/* Ensure main content starts properly below header */
+main.container {
+    padding-top: 1rem !important;
+}
+
+/* Fix hero section spacing */
+.hero {
+    padding: 2rem 0 !important;
+    margin-top: 0 !important;
+}
+
+.hero-content h2 {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.hero-content p {
+    font-size: 1rem !important;
+    margin-bottom: 1rem !important;
+}
