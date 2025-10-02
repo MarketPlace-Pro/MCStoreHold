@@ -2195,3 +2195,70 @@ footer {
 .newsletter button {
     padding: 6px 10px !important;
 }
+/* ===== PROPER COMPACT HEADER FIX ===== */
+/* Only reduce the padding, don't break the layout */
+header {
+    padding: 0.5rem 0 !important;
+}
+
+.header-content {
+    gap: 15px;
+}
+
+.logo h1 {
+    font-size: 1.4rem;
+}
+
+.main-nav ul {
+    gap: 1rem;
+}
+
+.main-nav a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.search-box button {
+    padding: 8px 12px;
+}
+
+.user-actions a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    header {
+        padding: 0.4rem 0 !important;
+    }
+    
+    .header-content {
+        gap: 10px;
+    }
+}
+
+/* Adjust main content spacing */
+main.container {
+    padding-top: 1rem;
+}
+
+/* Slightly reduce hero section to match */
+.hero {
+    padding: 2.5rem 0;
+}
+
+.hero-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
