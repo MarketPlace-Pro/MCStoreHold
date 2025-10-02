@@ -1971,3 +1971,227 @@ main.container {
     font-size: 1rem !important;
     margin-bottom: 1rem !important;
 }
+/* ===== SUPER COMPACT HEADER FIXES ===== */
+header {
+    padding: 0.3rem 0 !important;
+    min-height: 50px !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    padding: 0 !important;
+    gap: 10px !important;
+    min-height: 40px !important;
+    align-items: center !important;
+}
+
+.logo h1 {
+    font-size: 1.3rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.main-nav ul {
+    gap: 0.8rem !important;
+    margin: 0 !important;
+}
+
+.main-nav a {
+    font-size: 0.85rem !important;
+    padding: 0.2rem 0.6rem !important;
+}
+
+.header-actions {
+    gap: 0.6rem !important;
+}
+
+.search-box {
+    min-width: 180px !important;
+    border-radius: 20px !important;
+}
+
+.search-box input {
+    padding: 5px 10px !important;
+    font-size: 0.85rem !important;
+    height: 30px !important;
+}
+
+.search-box button {
+    padding: 5px 10px !important;
+    height: 30px !important;
+}
+
+.user-actions a {
+    padding: 4px 8px !important;
+    font-size: 0.85rem !important;
+    border-radius: 4px !important;
+}
+
+.cart-icon {
+    padding-right: 0 !important;
+}
+
+#cartCount {
+    font-size: 0.7rem !important;
+    padding: 1px 4px !important;
+    min-width: 16px !important;
+    top: -5px !important;
+    right: -5px !important;
+}
+
+/* Dropdown adjustments */
+.dropdown-content {
+    top: 35px !important;
+    min-width: 180px !important;
+}
+
+.dropdown-content a {
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
+}
+
+/* Mobile fixes for super compact header */
+@media (max-width: 768px) {
+    header {
+        padding: 0.2rem 0 !important;
+        min-height: 45px !important;
+    }
+    
+    .header-content {
+        gap: 8px !important;
+        padding: 0 8px !important;
+        min-height: 35px !important;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem !important;
+    }
+    
+    .search-box {
+        min-width: 140px !important;
+    }
+    
+    .search-box input {
+        padding: 4px 8px !important;
+        height: 28px !important;
+    }
+    
+    .search-box button {
+        padding: 4px 8px !important;
+        height: 28px !important;
+    }
+    
+    .user-actions a {
+        padding: 3px 6px !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .main-nav ul {
+        gap: 0.5rem !important;
+    }
+    
+    .main-nav a {
+        font-size: 0.8rem !important;
+        padding: 0.15rem 0.4rem !important;
+    }
+}
+
+/* Ensure main content starts properly below compact header */
+main.container {
+    padding-top: 0.5rem !important;
+}
+
+/* Fix hero section spacing to account for smaller header */
+.hero {
+    padding: 1.5rem 0 !important;
+    margin-top: 0 !important;
+}
+
+.hero-content h2 {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.hero-content p {
+    font-size: 0.95rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Adjust all page content to account for smaller header */
+.container {
+    padding-top: 0.5rem !important;
+}
+
+/* Make sure the header doesn't cover content */
+body {
+    padding-top: 0 !important;
+}
+
+/* ===== REDUCE HERO SECTION SIZE ===== */
+.hero {
+    padding: 1rem 0 !important;
+    min-height: 200px !important;
+}
+
+.hero-content h2 {
+    font-size: 1.6rem !important;
+    margin-bottom: 0.3rem !important;
+}
+
+.hero-content p {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.cta-button {
+    padding: 8px 20px !important;
+    font-size: 0.9rem !important;
+}
+
+/* Reduce category section padding */
+.categories {
+    padding: 1.5rem 0 !important;
+}
+
+.categories h2 {
+    margin-bottom: 1rem !important;
+    font-size: 1.4rem !important;
+}
+
+/* Reduce product grid padding */
+.product-grid {
+    padding: 1rem 0 !important;
+    gap: 1rem !important;
+}
+
+/* Make footer more compact too */
+footer {
+    padding: 1.5rem 0 0.5rem !important;
+    margin-top: 2rem !important;
+}
+
+.footer-content {
+    gap: 1.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 0.5rem !important;
+    font-size: 1rem !important;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.3rem !important;
+}
+
+.newsletter input {
+    padding: 6px !important;
+}
+
+.newsletter button {
+    padding: 6px 10px !important;
+}

@@ -78,3 +78,28 @@ function initCompactHeader() {
 document.addEventListener('DOMContentLoaded', function() {
     initCompactHeader();
 });
+
+// Force compact header immediately
+function forceCompactHeader() {
+    const header = document.querySelector('header');
+    const headerContent = document.querySelector('.header-content');
+    
+    if (header) {
+        header.style.padding = '0.2rem 0';
+        header.style.minHeight = '45px';
+    }
+    
+    if (headerContent) {
+        headerContent.style.minHeight = '35px';
+        headerContent.style.gap = '8px';
+    }
+}
+
+// Apply compact header immediately on load
+document.addEventListener('DOMContentLoaded', function() {
+    forceCompactHeader();
+    initCompactHeader(); // Keep the scroll behavior
+});
+
+// Also apply after a short delay to ensure it sticks
+setTimeout(forceCompactHeader, 100);
