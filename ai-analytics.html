@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Analytics - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .analytics-dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .chart-placeholder {
+            background: #f8f9fa;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .insight-badge {
+            background: #e8f5e8;
+            color: #27ae60;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="export-index.html">Home</a></li>
+                        <li><a href="export-products.html">Export Products</a></li>
+                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="ai-analytics.html" style="color: #ffd700; font-weight: bold;">AI Analytics</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="analytics-dashboard">
+        <div class="dashboard-header">
+            <h1>📊 AI Market Analytics</h1>
+            <p>Real-time export intelligence and market predictions</p>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" id="marketGrowth">+23.5%</div>
+                <div>Export Growth Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="activeDeals">147</div>
+                <div>Active Trade Deals</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="priceIndex">98.7</div>
+                <div>Price Competitiveness Index</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="successRate">94%</div>
+                <div>Trade Success Rate</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>📈 Export Volume Trends</h3>
+                <div class="chart-placeholder">
+                    AI-Powered Trend Analysis Chart
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>🌍 Market Distribution</h3>
+                <div class="chart-placeholder">
+                    Real-time Market Share Visualization
+                </div>
+            </div>
+        </div>
+
+        <h2>🎯 AI-Generated Insights</h2>
+        <div class="insights-grid">
+            <div class="insight-card">
+                <span class="insight-badge">High Opportunity</span>
+                <h3>Chinese Wine Market</h3>
+                <p>Demand for South African wines growing at 28% annually. Premium packaging and organic certification key differentiators.</p>
+            </div>
+            <div class="insight-card">
+                <span class="insight-badge">Emerging Trend</span>
+                <h3>EU Organic Foods</h3>
+                <p>Organic certification can increase price premium by 40%. Current supply gap of 15% in European markets.</p>
+            </div>
+            <div class="insight-card">
+                <span class="insight-badge">Logistics Alert</span>
+                <h3>Shipping Cost Reduction</h3>
+                <p>Consolidated shipping to Asia can reduce costs by 25%. Next optimal shipment date: 15 days from now.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate real-time metric updates
+        function updateMetrics() {
+            document.getElementById('marketGrowth').textContent = 
+                '+' + (23 + Math.random() * 2).toFixed(1) + '%';
+            document.getElementById('activeDeals').textContent = 
+                Math.floor(145 + Math.random() * 5);
+            document.getElementById('priceIndex').textContent = 
+                (98 + Math.random() * 2).toFixed(1);
+            document.getElementById('successRate').textContent = 
+                (93 + Math.random() * 2).toFixed(0) + '%';
+        }
+
+        setInterval(updateMetrics, 3000);
+        updateMetrics();
+    </script>
+</body>
+</html>
