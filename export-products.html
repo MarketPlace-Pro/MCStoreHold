@@ -6,88 +6,39 @@
     <title>Export Products - AfriTrade Global</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* All the previous CSS styles remain exactly the same */
-        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important; color: white !important; position: sticky !important; top: 0 !important; z-index: 1000 !important; box-shadow: 0 2px 20px rgba(0,0,0,0.1) !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
-        header .container { max-width: 1200px !important; margin: 0 auto !important; padding: 0.5rem 1rem !important; }
-        .header-content { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 1.5rem !important; flex-wrap: nowrap !important; min-height: auto !important; padding: 0 !important; margin: 0 !important; }
-        .logo h1 { margin: 0 !important; font-size: 1.4rem !important; }
-        .logo h1 a { color: white !important; text-decoration: none !important; }
-        .logo p { margin: 0 !important; font-size: 0.7rem !important; color: rgba(255,255,255,0.8) !important; }
-        .main-nav { flex: 1 !important; display: flex !important; justify-content: center !important; }
-        .main-nav ul { display: flex !important; gap: 1.5rem !important; margin: 0 !important; padding: 0 !important; list-style: none !important; }
-        .main-nav a { color: white !important; text-decoration: none !important; font-size: 0.9rem !important; font-weight: 500 !important; padding: 0.5rem 0 !important; white-space: nowrap !important; }
-        .main-nav a:hover { color: #ffd700 !important; }
-        .header-actions { display: flex !important; align-items: center !important; gap: 1rem !important; flex-shrink: 0 !important; }
-        .language-selector select { background: rgba(255,255,255,0.1) !important; color: white !important; border: 1px solid rgba(255,255,255,0.3) !important; border-radius: 5px !important; padding: 0.4rem 0.6rem !important; font-size: 0.8rem !important; }
-        .currency-display { background: rgba(255,255,255,0.15) !important; color: white !important; padding: 0.4rem 0.8rem !important; border-radius: 5px !important; font-size: 0.75rem !important; border-left: 3px solid #ffd700 !important; }
-        .account-btn { background: rgba(255,255,255,0.2) !important; color: white !important; border: 1px solid rgba(255,255,255,0.3) !important; padding: 0.5rem 0.8rem !important; border-radius: 5px !important; text-decoration: none !important; font-size: 0.8rem !important; }
-        .account-btn:hover { background: rgba(255,255,255,0.3) !important; }
+        /* Header styles */
+        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        header .container { max-width: 1200px; margin: 0 auto; padding: 0.5rem 1rem; }
+        .header-content { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+        .logo h1 { margin: 0; font-size: 1.4rem; }
+        .logo h1 a { color: white; text-decoration: none; }
+        .logo p { margin: 0; font-size: 0.7rem; color: rgba(255,255,255,0.8); }
+        .main-nav { flex: 1; display: flex; justify-content: center; }
+        .main-nav ul { display: flex; gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+        .main-nav a { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0; }
+        .main-nav a:hover { color: #ffd700; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .currency-display { background: rgba(255,255,255,0.15); color: white; padding: 0.4rem 0.8rem; border-radius: 5px; font-size: 0.75rem; }
+        .account-btn { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 0.8rem; border-radius: 5px; text-decoration: none; font-size: 0.8rem; }
 
-        .category-filters { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1.5rem 0; margin-bottom: 0; }
-        .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; margin-bottom: 0; }
-        .filter-card { background: white; padding: 1rem 0.8rem; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .filter-card:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.12); border-color: #2c5aa0; }
-        .filter-card.active { background: linear-gradient(135deg, #2c5aa0, #1e3d6f); color: white; border-color: #2c5aa0; transform: translateY(-2px); }
+        /* Category filters */
+        .category-filters { background: #f8f9fa; padding: 1.5rem 0; }
+        .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; }
+        .filter-card { background: white; padding: 1rem; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .filter-card:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.12); }
+        .filter-card.active { background: #2c5aa0; color: white; }
         .filter-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-        .filter-card h3 { font-size: 0.9rem; margin: 0 0 0.3rem 0; font-weight: 600; }
-        .filter-card p { font-size: 0.75rem; margin: 0; opacity: 0.8; }
 
-        .products-header { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; flex-wrap: wrap; gap: 1rem; }
-        .products-header h2 { margin: 0; color: #2c3e50; }
-        .sort-options select { padding: 0.6rem 1rem; border: 1px solid #ddd; border-radius: 8px; background: white; font-size: 0.9rem; min-width: 180px; }
-
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0 2rem 0; }
-        .export-product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid #e9ecef; position: relative; }
-        .export-product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: #2c5aa0; }
-        .moq-badge { position: absolute; top: 10px; left: 10px; background: #27ae60; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; z-index: 2; }
-        .export-product-card img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.3s ease; cursor: pointer; }
-        .export-product-card:hover img { transform: scale(1.05); }
+        /* Products grid */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; }
         .product-info { padding: 1.2rem; }
-        .product-info h3 { margin: 0 0 0.5rem 0; font-size: 1rem; line-height: 1.3; }
-        .product-info h3 a { color: #2c3e50; text-decoration: none; }
-        .product-info h3 a:hover { color: #2c5aa0; }
-        .supplier, .origin { color: #666; font-size: 0.8rem; margin: 0.2rem 0; line-height: 1.3; }
-        .product-markets { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.5rem 0; }
-        .market-tag { background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; border: 1px solid #bbdefb; font-weight: 500; }
-        .certification-badges { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.8rem 0; }
-        .cert-badge { background: #e8f5e8; color: #27ae60; padding: 3px 8px; border-radius: 10px; font-size: 0.65rem; border: 1px solid #27ae60; }
-        .export-details { background: #f8f9fa; padding: 0.8rem; border-radius: 6px; margin: 0.8rem 0; }
-        .detail { margin: 0.3rem 0; font-size: 0.8rem; line-height: 1.3; }
-        .product-price { display: flex; flex-direction: column; gap: 0.5rem; }
-        .price { font-size: 1.1rem; font-weight: bold; color: #2c5aa0; }
-        .moq-total { font-size: 0.8rem; color: #666; }
-        .load-more-container { text-align: center; margin: 2rem 0; }
-
-        @media (max-width: 768px) {
-            .container { padding: 0 1rem; }
-            .currency-display { display: none; }
-            .products-header { flex-direction: column; align-items: stretch; gap: 1rem; }
-            .sort-options select { width: 100%; }
-            .products-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
-            .filter-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-            .filter-card { min-height: 80px; padding: 0.7rem 0.4rem; }
-            .filter-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
-            .filter-card h3 { font-size: 0.8rem; }
-            .filter-card p { font-size: 0.7rem; }
-        }
-
-        @media (max-width: 480px) {
-            .products-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .filter-grid { grid-template-columns: repeat(2, 1fr); }
-            .language-selector { display: none; }
-            .user-actions { gap: 0.3rem; }
-            .account-btn { padding: 0.4rem 0.6rem; font-size: 0.75rem; }
-            .export-product-card img { height: 160px; }
-            .product-info { padding: 1rem; }
-        }
-
-        body { overflow-x: hidden; margin: 0; padding: 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        main.container { padding-top: 1rem !important; margin-top: 0 !important; }
+        .price { font-size: 1.2rem; font-weight: bold; color: #2c5aa0; }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -107,19 +58,9 @@
                 </nav>
                 
                 <div class="header-actions">
-                    <div class="language-selector">
-                        <select id="languageSelect">
-                            <option value="en">English</option>
-                            <option value="zh">中文</option>
-                            <option value="fr">Français</option>
-                            <option value="pt">Português</option>
-                        </select>
-                    </div>
-                    
                     <div class="currency-display">
                         <strong>Rates:</strong> ZAR/EUR: 0.049
                     </div>
-                    
                     <div class="user-actions">
                         <a href="supplier-login.html" class="account-btn">🏭 Supplier</a>
                         <a href="buyer-login.html" class="account-btn">🌍 Buyer</a>
@@ -129,120 +70,146 @@
         </div>
     </header>
 
-    <!-- Category Filters -->
     <section class="category-filters">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 1.2rem; color: #2c3e50; font-size: 1.5rem;">Browse African Export Products</h2>
+            <h2 style="text-align: center; margin-bottom: 1.2rem;">Browse African Export Products</h2>
             <div class="filter-grid">
-                <div class="filter-card active" data-category="all">
+                <div class="filter-card active" onclick="filterProducts('all')">
                     <div class="filter-icon">🌍</div>
                     <h3>All Products</h3>
-                    <p>50+ Export Ready</p>
+                    <p>View all products</p>
                 </div>
-                <div class="filter-card" data-category="wine">
+                <div class="filter-card" onclick="filterProducts('wine')">
                     <div class="filter-icon">🍷</div>
                     <h3>Wine & Spirits</h3>
                     <p>10 Products</p>
                 </div>
-                <div class="filter-card" data-category="fruits">
+                <div class="filter-card" onclick="filterProducts('fruits')">
                     <div class="filter-icon">🍋</div>
                     <h3>Fruits & Agriculture</h3>
-                    <p>10 Products</p>
-                </div>
-                <div class="filter-card" data-category="crafts">
-                    <div class="filter-icon">💎</div>
-                    <h3>Crafts & Minerals</h3>
-                    <p>10 Products</p>
-                </div>
-                <div class="filter-card" data-category="textiles">
-                    <div class="filter-icon">🧥</div>
-                    <h3>Textiles & Fashion</h3>
-                    <p>10 Products</p>
-                </div>
-                <div class="filter-card" data-category="spices">
-                    <div class="filter-icon">🌶️</div>
-                    <h3>Spices & Foods</h3>
                     <p>10 Products</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Grid -->
     <main class="container">
-        <div class="products-header">
+        <div class="products-header" style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0;">
             <h2 id="categoryTitle">All Export Products</h2>
-            <div class="sort-options">
-                <select id="sortSelect">
-                    <option value="featured">Featured</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="moq-low">MOQ: Low to High</option>
-                    <option value="name">Product Name</option>
-                </select>
-            </div>
         </div>
 
-        <div class="products-grid" id="exportProductsGrid">
-            <!-- Products will be loaded by JavaScript -->
-        </div>
-
-        <!-- Load More -->
-        <div class="load-more-container">
-            <button id="loadMoreBtn" class="cta-button">Load More Products</button>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be loaded here -->
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AfriTrade Global</h3>
-                    <p>Africa's premier export platform connecting local producers with global markets.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Export Products</h4>
-                    <ul>
-                        <li><a href="export-products.html?category=wine">Wine & Spirits</a></li>
-                        <li><a href="export-products.html?category=fruits">Agriculture</a></li>
-                        <li><a href="export-products.html?category=crafts">Crafts</a></li>
-                        <li><a href="export-products.html?category=textiles">Textiles</a></li>
-                        <li><a href="export-products.html?category=spices">Foods</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Trade Services</h4>
-                    <ul>
-                        <li><a href="export-logistics.html">Global Logistics</a></li>
-                        <li><a href="export-certifications.html">Export Compliance</a></li>
-                        <li><a href="quality-standards.html">Quality Standards</a></li>
-                        <li><a href="payment-methods.html">International Payments</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Markets</h4>
-                    <ul>
-                        <li><a href="market-eu.html">European Union</a></li>
-                        <li><a href="market-china.html">China</a></li>
-                        <li><a href="market-usa.html">United States</a></li>
-                        <li><a href="market-middleeast.html">Middle East</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="export-compliance.html">Export Compliance</a>
-                </div>
-            </div>
+            <p style="text-align: center; padding: 2rem 0; color: #666;">&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
         </div>
     </footer>
 
-    <!-- Include the working JavaScript -->
-    <script src="js/export-all-products.js""></script>
+    <script>
+        // Simple product data
+        const products = [
+            {
+                id: 1,
+                name: 'Stellenbosch Cabernet Sauvignon',
+                category: 'wine',
+                price: 150,
+                image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop',
+                supplier: 'Stellenbosch Vineyards',
+                moq: '120 bottles'
+            },
+            {
+                id: 2,
+                name: 'Chenin Blanc 2023',
+                category: 'wine', 
+                price: 130,
+                image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop',
+                supplier: 'Fairview Wines',
+                moq: '100 bottles'
+            },
+            {
+                id: 3,
+                name: 'Fresh Valencia Oranges',
+                category: 'fruits',
+                price: 8,
+                image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=400&h=300&fit=crop',
+                supplier: 'Citrus Farms SA',
+                moq: '10,000 kg'
+            },
+            {
+                id: 4,
+                name: 'Hass Avocados',
+                category: 'fruits',
+                price: 25,
+                image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop',
+                supplier: 'Green Gold Avocados',
+                moq: '5,000 kg'
+            },
+            {
+                id: 5,
+                name: 'Zulu Beaded Artwork',
+                category: 'crafts',
+                price: 250,
+                image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=300&fit=crop',
+                supplier: 'African Crafts Collective',
+                moq: '100 pieces'
+            },
+            {
+                id: 6,
+                name: 'Premium Rooibos Tea',
+                category: 'spices',
+                price: 120,
+                image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop',
+                supplier: 'Rooibos Limited',
+                moq: '500 kg'
+            }
+        ];
+
+        function loadProducts(category = 'all') {
+            const grid = document.getElementById('productsGrid');
+            const title = document.getElementById('categoryTitle');
+            
+            let filteredProducts = products;
+            if (category !== 'all') {
+                filteredProducts = products.filter(p => p.category === category);
+            }
+            
+            title.textContent = category === 'all' ? 'All Export Products' : 
+                              category === 'wine' ? '🍷 Wine & Spirits' :
+                              category === 'fruits' ? '🍋 Fruits & Agriculture' :
+                              category === 'crafts' ? '💎 Crafts & Minerals' : '🌶️ Spices & Foods';
+            
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p><strong>Supplier:</strong> ${product.supplier}</p>
+                        <p><strong>MOQ:</strong> ${product.moq}</p>
+                        <div class="price">R${product.price}</div>
+                        <button class="cta-button" style="width: 100%; margin-top: 1rem;">Export Inquiry</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            // Update active filter
+            document.querySelectorAll('.filter-card').forEach(card => card.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // Load products
+            loadProducts(category);
+        }
+
+        // Load products when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            console.log('Products loaded successfully!');
+        });
+    </script>
 </body>
 </html>
