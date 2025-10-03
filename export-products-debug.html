@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Products - Debug - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Same styles as before */
+        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important; color: white !important; position: sticky !important; top: 0 !important; z-index: 1000 !important; box-shadow: 0 2px 20px rgba(0,0,0,0.1) !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+        header .container { max-width: 1200px !important; margin: 0 auto !important; padding: 0.5rem 1rem !important; }
+        .header-content { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 1.5rem !important; flex-wrap: nowrap !important; min-height: auto !important; padding: 0 !important; margin: 0 !important; }
+        .logo h1 { margin: 0 !important; font-size: 1.4rem !important; }
+        .logo h1 a { color: white !important; text-decoration: none !important; }
+        .logo p { margin: 0 !important; font-size: 0.7rem !important; color: rgba(255,255,255,0.8) !important; }
+        .main-nav { flex: 1 !important; display: flex !important; justify-content: center !important; }
+        .main-nav ul { display: flex !important; gap: 1.5rem !important; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+        .main-nav a { color: white !important; text-decoration: none !important; font-size: 0.9rem !important; font-weight: 500 !important; padding: 0.5rem 0 !important; white-space: nowrap !important; }
+        .main-nav a:hover { color: #ffd700 !important; }
+        .header-actions { display: flex !important; align-items: center !important; gap: 1rem !important; flex-shrink: 0 !important; }
+        .language-selector select { background: rgba(255,255,255,0.1) !important; color: white !important; border: 1px solid rgba(255,255,255,0.3) !important; border-radius: 5px !important; padding: 0.4rem 0.6rem !important; font-size: 0.8rem !important; }
+        .currency-display { background: rgba(255,255,255,0.15) !important; color: white !important; padding: 0.4rem 0.8rem !important; border-radius: 5px !important; font-size: 0.75rem !important; border-left: 3px solid #ffd700 !important; }
+        .account-btn { background: rgba(255,255,255,0.2) !important; color: white !important; border: 1px solid rgba(255,255,255,0.3) !important; padding: 0.5rem 0.8rem !important; border-radius: 5px !important; text-decoration: none !important; font-size: 0.8rem !important; }
+        .account-btn:hover { background: rgba(255,255,255,0.3) !important; }
+
+        .category-filters { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 1.5rem 0; margin-bottom: 0; }
+        .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; margin-bottom: 0; }
+        .filter-card { background: white; padding: 1rem 0.8rem; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .filter-card:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.12); border-color: #2c5aa0; }
+        .filter-card.active { background: linear-gradient(135deg, #2c5aa0, #1e3d6f); color: white; border-color: #2c5aa0; transform: translateY(-2px); }
+        .filter-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .filter-card h3 { font-size: 0.9rem; margin: 0 0 0.3rem 0; font-weight: 600; }
+        .filter-card p { font-size: 0.75rem; margin: 0; opacity: 0.8; }
+
+        .products-header { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; flex-wrap: wrap; gap: 1rem; }
+        .products-header h2 { margin: 0; color: #2c3e50; }
+        .sort-options select { padding: 0.6rem 1rem; border: 1px solid #ddd; border-radius: 8px; background: white; font-size: 0.9rem; min-width: 180px; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 1rem 0 2rem 0; }
+        .export-product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid #e9ecef; position: relative; }
+        .export-product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: #2c5aa0; }
+        .moq-badge { position: absolute; top: 10px; left: 10px; background: #27ae60; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; z-index: 2; }
+        .export-product-card img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.3s ease; cursor: pointer; }
+        .export-product-card:hover img { transform: scale(1.05); }
+        .product-info { padding: 1.2rem; }
+        .product-info h3 { margin: 0 0 0.5rem 0; font-size: 1rem; line-height: 1.3; }
+        .product-info h3 a { color: #2c3e50; text-decoration: none; }
+        .product-info h3 a:hover { color: #2c5aa0; }
+        .supplier, .origin { color: #666; font-size: 0.8rem; margin: 0.2rem 0; line-height: 1.3; }
+        .product-markets { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.5rem 0; }
+        .market-tag { background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; border: 1px solid #bbdefb; font-weight: 500; }
+        .certification-badges { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.8rem 0; }
+        .cert-badge { background: #e8f5e8; color: #27ae60; padding: 3px 8px; border-radius: 10px; font-size: 0.65rem; border: 1px solid #27ae60; }
+        .export-details { background: #f8f9fa; padding: 0.8rem; border-radius: 6px; margin: 0.8rem 0; }
+        .detail { margin: 0.3rem 0; font-size: 0.8rem; line-height: 1.3; }
+        .product-price { display: flex; flex-direction: column; gap: 0.5rem; }
+        .price { font-size: 1.1rem; font-weight: bold; color: #2c5aa0; }
+        .moq-total { font-size: 0.8rem; color: #666; }
+        .load-more-container { text-align: center; margin: 2rem 0; }
+
+        .debug-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="export-index.html">Home</a></li>
+                        <li><a href="export-products.html" style="color: #ffd700; font-weight: bold;">Export Products</a></li>
+                        <li><a href="export-suppliers.html">African Suppliers</a></li>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Trade Compliance</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <select id="languageSelect">
+                            <option value="en">English</option>
+                            <option value="zh">中文</option>
+                            <option value="fr">Français</option>
+                            <option value="pt">Português</option>
+                        </select>
+                    </div>
+                    
+                    <div class="currency-display">
+                        <strong>Rates:</strong> ZAR/EUR: 0.049
+                    </div>
+                    
+                    <div class="user-actions">
+                        <a href="supplier-login.html" class="account-btn">🏭 Supplier</a>
+                        <a href="buyer-login.html" class="account-btn">🌍 Buyer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Filters -->
+    <section class="category-filters">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1.2rem; color: #2c3e50; font-size: 1.5rem;">Browse African Export Products</h2>
+            <div class="filter-grid">
+                <div class="filter-card active" data-category="all">
+                    <div class="filter-icon">🌍</div>
+                    <h3>All Products</h3>
+                    <p>50+ Export Ready</p>
+                </div>
+                <div class="filter-card" data-category="wine">
+                    <div class="filter-icon">🍷</div>
+                    <h3>Wine & Spirits</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="fruits">
+                    <div class="filter-icon">🍋</div>
+                    <h3>Fruits & Agriculture</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="crafts">
+                    <div class="filter-icon">💎</div>
+                    <h3>Crafts & Minerals</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="textiles">
+                    <div class="filter-icon">🧥</div>
+                    <h3>Textiles & Fashion</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="spices">
+                    <div class="filter-icon">🌶️</div>
+                    <h3>Spices & Foods</h3>
+                    <p>10 Products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <main class="container">
+        <div class="debug-info">
+            <strong>Debug Information:</strong><br>
+            JavaScript Status: <span id="jsStatus">Loading...</span><br>
+            Products Count: <span id="productsCount">0</span><br>
+            Current Category: <span id="currentCategory">all</span>
+        </div>
+
+        <div class="products-header">
+            <h2 id="categoryTitle">All Export Products</h2>
+            <div class="sort-options">
+                <select id="sortSelect">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="moq-low">MOQ: Low to High</option>
+                    <option value="name">Product Name</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="products-grid" id="exportProductsGrid">
+            <!-- Products will be loaded by JavaScript -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: #f8f9fa; border-radius: 10px;">
+                <h3>Loading Products...</h3>
+                <p>If products don't appear, check the JavaScript console for errors.</p>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="load-more-container">
+            <button id="loadMoreBtn" class="cta-button">Load More Products</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AfriTrade Global</h3>
+                    <p>Africa's premier export platform connecting local producers with global markets.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Export Products</h4>
+                    <ul>
+                        <li><a href="export-products.html?category=wine">Wine & Spirits</a></li>
+                        <li><a href="export-products.html?category=fruits">Agriculture</a></li>
+                        <li><a href="export-products.html?category=crafts">Crafts</a></li>
+                        <li><a href="export-products.html?category=textiles">Textiles</a></li>
+                        <li><a href="export-products.html?category=spices">Foods</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Trade Services</h4>
+                    <ul>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Export Compliance</a></li>
+                        <li><a href="quality-standards.html">Quality Standards</a></li>
+                        <li><a href="payment-methods.html">International Payments</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Markets</h4>
+                    <ul>
+                        <li><a href="market-eu.html">European Union</a></li>
+                        <li><a href="market-china.html">China</a></li>
+                        <li><a href="market-usa.html">United States</a></li>
+                        <li><a href="market-middleeast.html">Middle East</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="export-compliance.html">Export Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple inline JavaScript for debugging -->
+    <script>
+        // Simple product data for testing
+        const debugProducts = [
+            {
+                id: 'debug-1',
+                name: 'Test Wine Product',
+                category: 'wine',
+                supplier: 'Test Winery',
+                origin: 'Western Cape, South Africa',
+                price: 150,
+                unit: 'bottle',
+                minOrder: 100,
+                certification: ['Test Certified'],
+                description: 'Test product description',
+                image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'China'],
+                shipping: 'Container',
+                leadTime: '15-30 days'
+            },
+            {
+                id: 'debug-2', 
+                name: 'Test Fruit Product',
+                category: 'fruits',
+                supplier: 'Test Farm',
+                origin: 'Limpopo, South Africa',
+                price: 8,
+                unit: 'kilogram',
+                minOrder: 1000,
+                certification: ['Organic'],
+                description: 'Test fruit description',
+                image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=400&h=300&fit=crop',
+                exportMarkets: ['China', 'EU'],
+                shipping: 'Refrigerated',
+                leadTime: '7-14 days'
+            }
+        ];
+
+        console.log('Debug script loaded');
+        document.getElementById('jsStatus').textContent = 'Loaded';
+        document.getElementById('productsCount').textContent = debugProducts.length;
+
+        // Simple load function
+        function loadDebugProducts() {
+            const grid = document.getElementById('exportProductsGrid');
+            if (!grid) {
+                console.error('Products grid not found');
+                return;
+            }
+
+            grid.innerHTML = debugProducts.map(product => `
+                <div class="export-product-card">
+                    <div class="moq-badge">MOQ: ${product.minOrder} ${product.unit}s</div>
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="supplier">By ${product.supplier}</p>
+                        <p class="origin">📍 ${product.origin}</p>
+                        
+                        <div class="product-markets">
+                            ${product.exportMarkets.map(market => `<span class="market-tag">${market}</span>`).join('')}
+                        </div>
+                        
+                        <div class="certification-badges">
+                            ${product.certification.map(cert => `<span class="cert-badge">${cert}</span>`).join('')}
+                        </div>
+                        
+                        <div class="export-details">
+                            <div class="detail">
+                                <strong>Lead Time:</strong> ${product.leadTime}
+                            </div>
+                            <div class="detail">
+                                <strong>Shipping:</strong> ${product.shipping}
+                            </div>
+                        </div>
+                        
+                        <div class="product-price">
+                            <span class="price">R${product.price}/${product.unit}</span>
+                            <span class="moq-total">Min: R${(product.price * product.minOrder).toLocaleString()}</span>
+                            <button class="cta-button">Export Inquiry</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            console.log('Debug products loaded successfully');
+        }
+
+        // Load products when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, loading debug products...');
+            loadDebugProducts();
+            
+            // Add click handlers to filter cards
+            const filterCards = document.querySelectorAll('.filter-card');
+            filterCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    filterCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.dataset.category;
+                    document.getElementById('currentCategory').textContent = category;
+                    document.getElementById('categoryTitle').textContent = category === 'all' ? 'All Export Products' : category.charAt(0).toUpperCase() + category.slice(1) + ' Products';
+                    console.log('Category changed to:', category);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
