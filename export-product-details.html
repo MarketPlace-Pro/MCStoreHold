@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-detail-hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem 0;
+        }
+        
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .product-gallery img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .supplier-badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .price-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .price-main {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .certification-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .cert-badge {
+            background: #e8f5e8;
+            color: #27ae60;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #27ae60;
+        }
+        
+        .inquiry-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .related-products {
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
+                </div>
+                
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="fr">Français</option>
+                        <option value="pt">Português</option>
+                    </select>
+                </div>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="export-index.html">Home</a></li>
+                        <li><a href="export-products.html">Export Products</a></li>
+                        <li><a href="export-suppliers.html">African Suppliers</a></li>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Trade Compliance</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="currency-display">
+                        <strong>Live Rates:</strong>
+                        <span id="currencyRates">ZAR/EUR: 0.049 | ZAR/CNY: 0.39 | ZAR/USD: 0.053</span>
+                    </div>
+                    
+                    <div class="user-actions">
+                        <a href="supplier-login.html" class="account-btn">🏭 Supplier Login</a>
+                        <a href="buyer-login.html" class="account-btn">🌍 Global Buyer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Detail -->
+    <section class="product-detail-hero">
+        <div class="container">
+            <nav style="margin-bottom: 1rem;">
+                <a href="export-index.html">Home</a> &gt; 
+                <a href="export-products.html">Export Products</a> &gt; 
+                <a href="#" id="categoryBreadcrumb">Category</a> &gt; 
+                <span id="productBreadcrumb">Product Details</span>
+            </nav>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="product-detail-container">
+            <!-- Product Gallery -->
+            <div class="product-gallery">
+                <img id="productImage" src="" alt="Product Image">
+            </div>
+            
+            <!-- Product Info -->
+            <div class="product-info">
+                <div class="supplier-badge" id="supplierBadge">Supplier: Loading...</div>
+                <h1 id="productName">Product Name</h1>
+                <p id="productDescription" style="color: #666; line-height: 1.6;">Product description loading...</p>
+                
+                <div class="certification-badges" id="certificationBadges">
+                    <!-- Certifications will be loaded here -->
+                </div>
+                
+                <div class="price-section">
+                    <div class="price-main" id="productPrice">R0.00 / unit</div>
+                    <div style="color: #666; margin-top: 0.5rem;">
+                        Minimum Order Quantity: <strong id="moqValue">0 units</strong>
+                    </div>
+                    <div style="color: #666;">
+                        Minimum Order Value: <strong id="moqTotal">R0.00</strong>
+                    </div>
+                </div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span>Category:</span>
+                        <strong id="productCategory">-</strong>
+                    </div>
+                    <div class="spec-item">
+                        <span>Origin:</span>
+                        <strong id="productOrigin">-</strong>
+                    </div>
+                    <div class="spec-item">
+                        <span>Lead Time:</span>
+                        <strong id="productLeadTime">-</strong>
+                    </div>
+                    <div class="spec-item">
+                        <span>Shipping:</span>
+                        <strong id="productShipping">-</strong>
+                    </div>
+                    <div class="spec-item">
+                        <span>Unit:</span>
+                        <strong id="productUnit">-</strong>
+                    </div>
+                    <div class="spec-item">
+                        <span>Export Markets:</span>
+                        <strong id="productMarkets">-</strong>
+                    </div>
+                </div>
+                
+                <button onclick="showInquiryForm()" class="cta-button" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                    📧 Request Export Quote
+                </button>
+            </div>
+        </div>
+        
+        <!-- Inquiry Form -->
+        <div class="inquiry-form" id="inquiryForm" style="display: none;">
+            <h2>Request Export Quote</h2>
+            <form id="exportInquiryForm">
+                <div class="form-group">
+                    <label for="inquiryProduct">Product</label>
+                    <input type="text" id="inquiryProduct" readonly>
+                </div>
+                
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="inquiryName">Full Name *</label>
+                        <input type="text" id="inquiryName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiryCompany">Company Name *</label>
+                        <input type="text" id="inquiryCompany" required>
+                    </div>
+                </div>
+                
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="inquiryEmail">Email Address *</label>
+                        <input type="email" id="inquiryEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiryPhone">Phone Number *</label>
+                        <input type="tel" id="inquiryPhone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="inquiryCountry">Country *</label>
+                    <select id="inquiryCountry" required>
+                        <option value="">Select Country</option>
+                        <option value="china">China</option>
+                        <option value="germany">Germany</option>
+                        <option value="france">France</option>
+                        <option value="usa">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="uae">United Arab Emirates</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="inquiryQuantity">Requested Quantity *</label>
+                        <input type="number" id="inquiryQuantity" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiryDestination">Destination Port *</label>
+                        <input type="text" id="inquiryDestination" required placeholder="e.g., Shanghai, Hamburg">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="inquiryMessage">Additional Requirements</label>
+                    <textarea id="inquiryMessage" rows="4" placeholder="Any specific requirements, certifications needed, or questions..."></textarea>
+                </div>
+                
+                <button type="submit" class="cta-button" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                    📤 Submit Export Inquiry
+                </button>
+            </form>
+        </div>
+        
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2>Related Export Products</h2>
+            <div class="products-grid" id="relatedProductsGrid">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AfriTrade Global</h3>
+                    <p>Africa's premier export platform connecting local producers with global markets.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📷</a>
+                        <a href="#">💼</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Export Products</h4>
+                    <ul>
+                        <li><a href="export-products.html?category=wine">Wine & Spirits</a></li>
+                        <li><a href="export-products.html?category=fruits">Agriculture</a></li>
+                        <li><a href="export-products.html?category=crafts">Crafts</a></li>
+                        <li><a href="export-products.html?category=textiles">Textiles</a></li>
+                        <li><a href="export-products.html?category=spices">Foods</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Trade Services</h4>
+                    <ul>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Export Compliance</a></li>
+                        <li><a href="quality-standards.html">Quality Standards</a></li>
+                        <li><a href="payment-methods.html">International Payments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Markets</h4>
+                    <ul>
+                        <li><a href="market-eu.html">European Union</a></li>
+                        <li><a href="market-china.html">China</a></li>
+                        <li><a href="market-usa.html">United States</a></li>
+                        <li><a href="market-middleeast.html">Middle East</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="export-compliance.html">Export Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/export-data-enhanced.js"></script>
+    <script src="js/export-product-details.js"></script>
+</body>
+</html>

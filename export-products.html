@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Products - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .category-filters {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .filter-card:hover, .filter-card.active {
+            border-color: #2c5aa0;
+            transform: translateY(-5px);
+        }
+        
+        .filter-card.active {
+            background: #2c5aa0;
+            color: white;
+        }
+        
+        .filter-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .sort-options {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .export-product-card {
+            position: relative;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .export-product-card:hover {
+            border-color: #2c5aa0;
+            transform: translateY(-5px);
+        }
+        
+        .moq-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .product-markets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin: 0.5rem 0;
+        }
+        
+        .market-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            border: 1px solid #bbdefb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
+                </div>
+                
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="fr">Français</option>
+                        <option value="pt">Português</option>
+                    </select>
+                </div>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="export-index.html">Home</a></li>
+                        <li><a href="export-products.html" style="color: #ffd700; font-weight: bold;">Export Products</a></li>
+                        <li><a href="export-suppliers.html">African Suppliers</a></li>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Trade Compliance</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="currency-display">
+                        <strong>Live Rates:</strong>
+                        <span id="currencyRates">ZAR/EUR: 0.049 | ZAR/CNY: 0.39 | ZAR/USD: 0.053</span>
+                    </div>
+                    
+                    <div class="user-actions">
+                        <a href="supplier-login.html" class="account-btn">🏭 Supplier Login</a>
+                        <a href="buyer-login.html" class="account-btn">🌍 Global Buyer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Filters -->
+    <section class="category-filters">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Browse African Export Products</h2>
+            <div class="filter-grid">
+                <div class="filter-card active" data-category="all">
+                    <div class="filter-icon">🌍</div>
+                    <h3>All Products</h3>
+                    <p>50+ Export Ready</p>
+                </div>
+                <div class="filter-card" data-category="wine">
+                    <div class="filter-icon">🍷</div>
+                    <h3>Wine & Spirits</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="fruits">
+                    <div class="filter-icon">🍋</div>
+                    <h3>Fruits & Agriculture</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="crafts">
+                    <div class="filter-icon">💎</div>
+                    <h3>Crafts & Minerals</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="textiles">
+                    <div class="filter-icon">🧥</div>
+                    <h3>Textiles & Fashion</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="spices">
+                    <div class="filter-icon">🌶️</div>
+                    <h3>Spices & Foods</h3>
+                    <p>10 Products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <main class="container">
+        <div class="products-header">
+            <h2 id="categoryTitle">All Export Products</h2>
+            <div class="sort-options">
+                <select id="sortSelect">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="moq-low">MOQ: Low to High</option>
+                    <option value="name">Product Name</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="products-grid" id="exportProductsGrid">
+            <!-- Products will be loaded by JavaScript -->
+        </div>
+
+        <!-- Loading More -->
+        <div style="text-align: center; margin: 3rem 0;">
+            <button id="loadMoreBtn" class="cta-button">Load More Products</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AfriTrade Global</h3>
+                    <p>Africa's premier export platform connecting local producers with global markets.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📷</a>
+                        <a href="#">💼</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Export Products</h4>
+                    <ul>
+                        <li><a href="export-products.html?category=wine">Wine & Spirits</a></li>
+                        <li><a href="export-products.html?category=fruits">Agriculture</a></li>
+                        <li><a href="export-products.html?category=crafts">Crafts</a></li>
+                        <li><a href="export-products.html?category=textiles">Textiles</a></li>
+                        <li><a href="export-products.html?category=spices">Foods</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Trade Services</h4>
+                    <ul>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Export Compliance</a></li>
+                        <li><a href="quality-standards.html">Quality Standards</a></li>
+                        <li><a href="payment-methods.html">International Payments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Markets</h4>
+                    <ul>
+                        <li><a href="market-eu.html">European Union</a></li>
+                        <li><a href="market-china.html">China</a></li>
+                        <li><a href="market-usa.html">United States</a></li>
+                        <li><a href="market-middleeast.html">Middle East</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="export-compliance.html">Export Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/export-data-enhanced.js"></script>
+    <script src="js/export-products.js"></script>
+</body>
+</html>
