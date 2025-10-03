@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine & Spirits Export - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .category-hero {
+            background: linear-gradient(135deg, #8B0000, #A52A2A);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .export-product-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .export-product-card:hover {
+            border-color: #8B0000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.1);
+        }
+        .moq-badge {
+            background: #8B0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="export-index.html">Home</a></li>
+                        <li class="dropdown">
+                            <a href="export-products.html">Export Products ▾</a>
+                            <div class="dropdown-content">
+                                <a href="export-category-wine.html" style="color: #ffd700; font-weight: bold;">🍷 Wine & Spirits</a>
+                                <a href="export-category-fruits.html">🍋 Fruits & Agriculture</a>
+                                <a href="export-category-crafts.html">💎 Crafts & Minerals</a>
+                                <a href="export-category-textiles.html">🧥 Textiles & Fashion</a>
+                                <a href="export-category-spices.html">🌶️ Spices & Foods</a>
+                            </div>
+                        </li>
+                        <li><a href="export-suppliers.html">African Suppliers</a></li>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Trade Compliance</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="currency-display">
+                        <strong>Live Rates:</strong>
+                        <span id="currencyRates">ZAR/EUR: 0.049 | ZAR/CNY: 0.39 | ZAR/USD: 0.053</span>
+                    </div>
+                    
+                    <div class="user-actions">
+                        <a href="supplier-login.html" class="account-btn">🏭 Supplier Login</a>
+                        <a href="buyer-login.html" class="account-btn">🌍 Global Buyer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Hero -->
+    <section class="category-hero">
+        <div class="container">
+            <nav style="margin-bottom: 1rem;">
+                <a href="export-index.html">Home</a> &gt; 
+                <a href="export-products.html">Export Products</a> &gt; 
+                <span>Wine & Spirits</span>
+            </nav>
+            <h1>🍷 Wine & Spirits Export</h1>
+            <p>Premium South African Wines for Global Markets</p>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <main class="container">
+        <div class="products-header">
+            <h2>10 Premium Wine Products</h2>
+            <p>Export-ready South African wines with international certifications</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Wine Product 1 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 120 bottles</div>
+                <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop" alt="Stellenbosch Cabernet Sauvignon">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-1.html">Stellenbosch Cabernet Sauvignon 2022</a></h3>
+                    <p class="supplier">By Stellenbosch Vineyards</p>
+                    <p class="origin">📍 Western Cape, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">EU Organic</span>
+                        <span class="cert-badge">Wine of Origin</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> EU, China, USA
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 15-30 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container (1200 cases)
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R150/bottle</span>
+                        <span class="moq-total">Min: R18,000</span>
+                        <a href="export-product-wine-1.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 2 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 100 bottles</div>
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop" alt="Chenin Blanc">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-2.html">Chenin Blanc 2023</a></h3>
+                    <p class="supplier">By Fairview Wines</p>
+                    <p class="origin">📍 Paarl, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Sustainable</span>
+                        <span class="cert-badge">Wine of Origin</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> EU, China, UK
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 15-25 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R130/bottle</span>
+                        <span class="moq-total">Min: R13,000</span>
+                        <a href="export-product-wine-2.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 3 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 80 bottles</div>
+                <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&h=300&fit=crop" alt="Pinotage Reserve">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-3.html">Pinotage Reserve 2021</a></h3>
+                    <p class="supplier">By Kanonkop Estate</p>
+                    <p class="origin">📍 Stellenbosch, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Premium</span>
+                        <span class="cert-badge">Award Winning</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> USA, EU, Japan
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 20-30 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Temperature Controlled
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R280/bottle</span>
+                        <span class="moq-total">Min: R22,400</span>
+                        <a href="export-product-wine-3.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 4 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 150 bottles</div>
+                <img src="https://images.unsplash.com/photo-1474722883778-792e799030e3?w=400&h=300&fit=crop" alt="Sauvignon Blanc">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-4.html">Sauvignon Blanc 2023</a></h3>
+                    <p class="supplier">By Jordan Wine Estate</p>
+                    <p class="origin">📍 Stellenbosch, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Organic</span>
+                        <span class="cert-badge">Sustainable</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> EU, Canada, Scandinavia
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 15-25 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R145/bottle</span>
+                        <span class="moq-total">Min: R21,750</span>
+                        <a href="export-product-wine-4.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 5 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 110 bottles</div>
+                <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=400&h=300&fit=crop" alt="Shiraz">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-5.html">Shiraz 2022</a></h3>
+                    <p class="supplier">By Boschendal Estate</p>
+                    <p class="origin">📍 Franschhoek, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">EU Organic</span>
+                        <span class="cert-badge">Biodynamic</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> EU, USA, Australia
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 18-28 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R165/bottle</span>
+                        <span class="moq-total">Min: R18,150</span>
+                        <a href="export-product-wine-5.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 6 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 90 bottles</div>
+                <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop" alt="Cap Classique Brut">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-6.html">Cap Classique Brut</a></h3>
+                    <p class="supplier">By Graham Beck Wines</p>
+                    <p class="origin">📍 Robertson, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Méthode Cap Classique</span>
+                        <span class="cert-badge">Premium</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> EU, USA, Middle East
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 20-30 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Temperature Controlled
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R195/bottle</span>
+                        <span class="moq-total">Min: R17,550</span>
+                        <a href="export-product-wine-6.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 7 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 130 bottles</div>
+                <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=300&fit=crop" alt="Rosé">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-7.html">Rosé 2023</a></h3>
+                    <p class="supplier">By Haute Cabrière</p>
+                    <p class="origin">📍 Franschhoek, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Sustainable</span>
+                        <span class="cert-badge">Vegan</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> China, Japan, EU
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 15-25 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R125/bottle</span>
+                        <span class="moq-total">Min: R16,250</span>
+                        <a href="export-product-wine-7.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 8 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 100 bottles</div>
+                <img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=400&h=300&fit=crop" alt="Merlot">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-8.html">Merlot 2022</a></h3>
+                    <p class="supplier">By Rust en Vrede</p>
+                    <p class="origin">📍 Stellenbosch, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Estate Wine</span>
+                        <span class="cert-badge">Premium</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> USA, EU, Canada
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 18-28 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R175/bottle</span>
+                        <span class="moq-total">Min: R17,500</span>
+                        <a href="export-product-wine-8.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 9 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 70 bottles</div>
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop" alt="Chardonnay">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-9.html">Chardonnay 2023</a></h3>
+                    <p class="supplier">By Hamilton Russell</p>
+                    <p class="origin">📍 Hemel-en-Aarde Valley</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Premium</span>
+                        <span class="cert-badge">Terroir Specific</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> EU, UK, USA
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 20-30 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Temperature Controlled
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R220/bottle</span>
+                        <span class="moq-total">Min: R15,400</span>
+                        <a href="export-product-wine-9.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine Product 10 -->
+            <div class="product-card export-product-card">
+                <div class="moq-badge">MOQ: 85 bottles</div>
+                <img src="https://images.unsplash.com/photo-1474722883778-792e799030e3?w=400&h=300&fit=crop" alt="Port Style Wine">
+                <div class="product-info">
+                    <h3><a href="export-product-wine-10.html">Port Style Wine</a></h3>
+                    <p class="supplier">By Boplaas Family Vineyards</p>
+                    <p class="origin">📍 Calitzdorp, South Africa</p>
+                    
+                    <div class="certification-badges">
+                        <span class="cert-badge">Fortified</span>
+                        <span class="cert-badge">Premium</span>
+                    </div>
+                    
+                    <div class="export-details">
+                        <div class="detail">
+                            <strong>Markets:</strong> UK, EU, USA
+                        </div>
+                        <div class="detail">
+                            <strong>Lead Time:</strong> 18-28 days
+                        </div>
+                        <div class="detail">
+                            <strong>Shipping:</strong> Container
+                        </div>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="price">R185/bottle</span>
+                        <span class="moq-total">Min: R15,725</span>
+                        <a href="export-product-wine-10.html" class="cta-button">Export Inquiry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AfriTrade Global</h3>
+                    <p>Africa's premier export platform connecting local producers with global markets.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📷</a>
+                        <a href="#">💼</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Export Products</h4>
+                    <ul>
+                        <li><a href="export-category-wine.html">Wine & Spirits</a></li>
+                        <li><a href="export-category-fruits.html">Agriculture</a></li>
+                        <li><a href="export-category-crafts.html">Crafts</a></li>
+                        <li><a href="export-category-textiles.html">Textiles</a></li>
+                        <li><a href="export-category-spices.html">Foods</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Trade Services</h4>
+                    <ul>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Export Compliance</a></li>
+                        <li><a href="quality-standards.html">Quality Standards</a></li>
+                        <li><a href="payment-methods.html">International Payments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Markets</h4>
+                    <ul>
+                        <li><a href="market-eu.html">European Union</a></li>
+                        <li><a href="market-china.html">China</a></li>
+                        <li><a href="market-usa.html">United States</a></li>
+                        <li><a href="market-middleeast.html">Middle East</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="export-compliance.html">Export Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
