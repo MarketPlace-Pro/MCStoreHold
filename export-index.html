@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfriTrade Global - Africa to World Export Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .export-hero {
+            background: linear-gradient(135deg, #2c5aa0, #27ae60, #e67e22);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .language-selector {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .currency-display {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Multi-language Support -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
+                </div>
+                
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="fr">Français</option>
+                        <option value="pt">Português</option>
+                    </select>
+                </div>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="export-index.html">Home</a></li>
+                        <li class="dropdown">
+                            <a href="export-products.html">Export Products ▾</a>
+                            <div class="dropdown-content">
+                                <a href="category-export.html?cat=wine">🍷 Wine & Spirits</a>
+                                <a href="category-export.html?cat=fruits">🍋 Fruits & Agriculture</a>
+                                <a href="category-export.html?cat=crafts">💎 Crafts & Minerals</a>
+                                <a href="category-export.html?cat=textiles">🧥 Textiles & Fashion</a>
+                                <a href="category-export.html?cat=spices">🌶️ Spices & Foods</a>
+                            </div>
+                        </li>
+                        <li><a href="export-suppliers.html">African Suppliers</a></li>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Trade Compliance</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="currency-display">
+                        <strong>Live Rates:</strong>
+                        <span id="currencyRates">ZAR/EUR: 0.049 | ZAR/CNY: 0.39 | ZAR/USD: 0.053</span>
+                    </div>
+                    
+                    <div class="user-actions">
+                        <a href="supplier-login.html" class="account-btn">🏭 Supplier Login</a>
+                        <a href="buyer-login.html" class="account-btn">🌍 Global Buyer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="export-hero">
+        <div class="container">
+            <h1>Export African Excellence to the World</h1>
+            <p>Connecting African producers directly with global buyers</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>African Suppliers</p>
+                </div>
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>Countries Served</p>
+                </div>
+                <div class="stat">
+                    <h3>R100M+</h3>
+                    <p>Annual Trade</p>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="supplier-registration.html" class="cta-button">🏭 Become a Supplier</a>
+                <a href="buyer-registration.html" class="cta-button secondary">🌍 Source from Africa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Export Products -->
+    <main class="container">
+        <section class="featured-products">
+            <h2>Featured African Export Products</h2>
+            <div class="products-grid" id="featuredExportProducts">
+                <!-- Products loaded by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Export Process -->
+        <section class="export-process">
+            <h2>How African Export Works</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-icon">🏭</div>
+                    <h3>1. Supplier Registration</h3>
+                    <p>African producers register with quality certification</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🌍</div>
+                    <h3>2. Global Buyer Access</h3>
+                    <p>International buyers discover authentic African products</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">📦</div>
+                    <h3>3. Logistics & Shipping</h3>
+                    <p>We handle export documentation and global delivery</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">💳</div>
+                    <h3>4. Secure Payment</h3>
+                    <p>Multi-currency transactions with trade assurance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Intelligence -->
+        <section class="market-intel">
+            <h2>African Export Opportunities</h2>
+            <div class="intel-grid">
+                <div class="intel-card">
+                    <h3>🍷 EU Wine Market</h3>
+                    <p>South African wine exports to EU growing at 15% annually</p>
+                    <div class="demand-meter">High Demand</div>
+                </div>
+                <div class="intel-card">
+                    <h3>🍋 Chinese Citrus</h3>
+                    <p>China imports 200,000 tons of citrus from Africa yearly</p>
+                    <div class="demand-meter">Very High</div>
+                </div>
+                <div class="intel-card">
+                    <h3>💎 Mineral Exports</h3>
+                    <p>African minerals in high demand for electric vehicles</p>
+                    <div class="demand-meter">Growing</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AfriTrade Global</h3>
+                    <p>Africa's premier export platform connecting local producers with global markets.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📷</a>
+                        <a href="#">💼</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Export Products</h4>
+                    <ul>
+                        <li><a href="category-export.html?cat=wine">Wine & Spirits</a></li>
+                        <li><a href="category-export.html?cat=fruits">Agriculture</a></li>
+                        <li><a href="category-export.html?cat=crafts">Crafts</a></li>
+                        <li><a href="category-export.html?cat=textiles">Textiles</a></li>
+                        <li><a href="category-export.html?cat=spices">Foods</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Trade Services</h4>
+                    <ul>
+                        <li><a href="export-logistics.html">Global Logistics</a></li>
+                        <li><a href="export-certifications.html">Export Compliance</a></li>
+                        <li><a href="quality-standards.html">Quality Standards</a></li>
+                        <li><a href="payment-methods.html">International Payments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Markets</h4>
+                    <ul>
+                        <li><a href="market-eu.html">European Union</a></li>
+                        <li><a href="market-china.html">China</a></li>
+                        <li><a href="market-usa.html">United States</a></li>
+                        <li><a href="market-middleeast.html">Middle East</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="export-compliance.html">Export Compliance</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/export-platform.js"></script>
+</body>
+</html>
