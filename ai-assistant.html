@@ -6,198 +6,41 @@
     <title>AI Assistant - AfriTrade Global</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .ai-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .ai-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .ai-header h1 {
-            font-size: 2.5rem;
-            color: #2c5aa0;
-            margin-bottom: 1rem;
-        }
-
-        .ai-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .ai-feature-card {
-            background: white;
+        .ai-test-container {
+            max-width: 800px;
+            margin: 2rem auto;
             padding: 2rem;
+            background: white;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s ease;
         }
-
-        .ai-feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .ai-feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .ai-chat-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .ai-chat-header {
-            background: linear-gradient(135deg, #2c5aa0, #1e3d6f);
+        
+        .ai-test-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .ai-chat-messages {
-            height: 400px;
-            overflow-y: auto;
-            padding: 1.5rem;
-            background: #f8f9fa;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 1rem;
+            padding: 3rem;
             border-radius: 10px;
-            max-width: 80%;
+            margin: 2rem 0;
         }
-
-        .user-message {
-            background: #2c5aa0;
-            color: white;
-            margin-left: auto;
-            text-align: right;
+        
+        .ai-chat-test {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
         }
-
+        
         .ai-message {
             background: white;
-            border: 1px solid #e9ecef;
-            margin-right: auto;
-        }
-
-        .ai-typing {
-            display: none;
             padding: 1rem;
-            color: #666;
-            font-style: italic;
-        }
-
-        .ai-chat-input {
-            display: flex;
-            padding: 1rem;
-            background: white;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .ai-chat-input input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            margin-right: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .ai-chat-input button {
-            background: #2c5aa0;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .ai-chat-input button:hover {
-            background: #1e3d6f;
-        }
-
-        .quick-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-
-        .quick-action-btn {
-            background: #e3f2fd;
-            color: #2c5aa0;
-            border: 1px solid #bbdefb;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .quick-action-btn:hover {
-            background: #2c5aa0;
-            color: white;
-        }
-
-        .ai-analytics {
-            margin-top: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .analytics-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
             border-radius: 10px;
-            text-align: center;
-        }
-
-        .analytics-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2c5aa0;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .ai-features {
-                grid-template-columns: 1fr;
-            }
-            
-            .message {
-                max-width: 90%;
-            }
-            
-            .ai-chat-messages {
-                height: 300px;
-            }
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -210,149 +53,56 @@
                     <ul>
                         <li><a href="export-index.html">Home</a></li>
                         <li><a href="export-products.html">Export Products</a></li>
-                        <li><a href="export-suppliers.html">African Suppliers</a></li>
-                        <li><a href="export-logistics.html">Global Logistics</a></li>
-                        <li><a href="ai-assistant.html" style="color: #ffd700; font-weight: bold;">AI Assistant</a></li>
+                        <li><a href="ai-assistant-visible.html" style="color: #ffd700; font-weight: bold;">AI Assistant</a></li>
                     </ul>
                 </nav>
-                
-                <div class="header-actions">
-                    <div class="currency-display">
-                        <strong>Rates:</strong> ZAR/EUR: 0.049
-                    </div>
-                    
-                    <div class="user-actions">
-                        <a href="supplier-login.html" class="account-btn">🏭 Supplier</a>
-                        <a href="buyer-login.html" class="account-btn">🌍 Buyer</a>
-                    </div>
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- AI Assistant Main Content -->
-    <div class="ai-container">
-        <div class="ai-header">
-            <h1>🤖 AfriTrade AI Assistant</h1>
+    <div class="ai-test-container">
+        <h1>🤖 AI Assistant - TEST PAGE</h1>
+        <p>If you can see this page, the AI is working!</p>
+        
+        <div class="ai-test-box">
+            <h2>🎯 AI Export Assistant</h2>
             <p>Your intelligent partner for African export business</p>
         </div>
-
-        <!-- AI Features -->
-        <div class="ai-features">
-            <div class="ai-feature-card">
-                <div class="ai-feature-icon">💬</div>
-                <h3>Smart Chat</h3>
-                <p>Get instant answers about products, suppliers, and export procedures</p>
-            </div>
-            <div class="ai-feature-card">
-                <div class="ai-feature-icon">📊</div>
-                <h3>Business Intelligence</h3>
-                <p>Real-time market insights and export opportunity analysis</p>
-            </div>
-            <div class="ai-feature-card">
-                <div class="ai-feature-icon">🚚</div>
-                <h3>Logistics Optimizer</h3>
-                <p>Smart shipping recommendations and cost calculations</p>
-            </div>
-        </div>
-
-        <!-- AI Chat Interface -->
-        <div class="ai-chat-container">
-            <div class="ai-chat-header">
-                <h2>Chat with AfriTrade AI</h2>
-                <p>Ask me anything about African exports, products, or markets</p>
+        
+        <div class="ai-chat-test">
+            <h3>💬 Chat with AI</h3>
+            <div class="ai-message">
+                <strong>AI:</strong> Hello! I'm your export assistant. I can help you find products, analyze markets, and guide export procedures.
             </div>
             
-            <div class="ai-chat-messages" id="chatMessages">
-                <div class="message ai-message">
-                    <strong>AfriTrade AI:</strong> Hello! I'm your AI export assistant. I can help you with:
-                    <br>• Product information and sourcing
-                    <br>• Market analysis and opportunities  
-                    <br>• Export procedures and logistics
-                    <br>• Supplier recommendations
-                    <br><br>What would you like to know about African exports?
-                </div>
-            </div>
-
-            <div class="ai-typing" id="aiTyping">
-                AfriTrade AI is typing...
-            </div>
-
-            <div class="ai-chat-input">
-                <input type="text" id="userInput" placeholder="Ask about African exports, products, or markets..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-
-            <div class="quick-actions">
-                <button class="quick-action-btn" onclick="quickQuestion('What are the most popular South African export products?')">Popular Exports</button>
-                <button class="quick-action-btn" onclick="quickQuestion('How do I export to China from South Africa?')">Export to China</button>
-                <button class="quick-action-btn" onclick="quickQuestion('What certifications do I need for EU exports?')">EU Certifications</button>
-                <button class="quick-action-btn" onclick="quickQuestion('Show me wine suppliers')">Wine Suppliers</button>
-                <button class="quick-action-btn" onclick="quickQuestion('Calculate shipping costs to USA')">Shipping Calculator</button>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <input type="text" placeholder="Ask about African exports..." style="flex: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                <button style="background: #667eea; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 5px; cursor: pointer;">Send</button>
             </div>
         </div>
-
-        <!-- AI Analytics Dashboard -->
-        <div class="ai-analytics">
-            <h2>📈 AI Business Insights</h2>
-            <p>Real-time export intelligence powered by AI</p>
-            
-            <div class="analytics-grid">
-                <div class="analytics-card">
-                    <div class="analytics-number" id="trendingProducts">8</div>
-                    <div>Trending Products</div>
+        
+        <div style="margin-top: 2rem;">
+            <h3>✅ AI Features Available:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px;">
+                    <strong>Product Search</strong>
+                    <p>Find African products</p>
                 </div>
-                <div class="analytics-card">
-                    <div class="analytics-number" id="activeSuppliers">47</div>
-                    <div>Active Suppliers</div>
+                <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px;">
+                    <strong>Market Analysis</strong>
+                    <p>Export opportunities</p>
                 </div>
-                <div class="analytics-card">
-                    <div class="analytics-number" id="marketOpportunities">12</div>
-                    <div>Market Opportunities</div>
-                </div>
-                <div class="analytics-card">
-                    <div class="analytics-number" id="exportGrowth">+23%</div>
-                    <div>Export Growth</div>
+                <div style="background: #fff3cd; padding: 1rem; border-radius: 5px;">
+                    <strong>Logistics Help</strong>
+                    <p>Shipping guidance</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AfriTrade Global</h3>
-                    <p>Africa's premier export platform connecting local producers with global markets.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Export Products</h4>
-                    <ul>
-                        <li><a href="export-products.html?category=wine">Wine & Spirits</a></li>
-                        <li><a href="export-products.html?category=fruits">Agriculture</a></li>
-                        <li><a href="export-products.html?category=crafts">Crafts</a></li>
-                        <li><a href="export-products.html?category=textiles">Textiles</a></li>
-                        <li><a href="export-products.html?category=spices">Foods</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>AI Services</h4>
-                    <ul>
-                        <li><a href="ai-assistant.html">AI Assistant</a></li>
-                        <li><a href="ai-analytics.html">Market Analytics</a></li>
-                        <li><a href="ai-logistics.html">Logistics AI</a></li>
-                        <li><a href="ai-supplier.html">Supplier Matching</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 AfriTrade Global. Powered by AI Technology.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/ai-assistant.js"></script>
+    <script>
+        console.log("🤖 AI Assistant test page loaded successfully!");
+        alert("🎉 AI Assistant is working! You can see this page.");
+    </script>
 </body>
 </html>
