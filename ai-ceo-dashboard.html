@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI CEO Dashboard - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .ai-dashboard {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .ai-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        .ai-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .ai-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .action-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .ai-console {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: monospace;
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 2rem;
+        }
+        .ai-command {
+            background: #2d2d2d;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .command-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .ai-suggestions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="export-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🤖 AI CEO Dashboard</h1>
+                    <span>AfriTrade Global Management</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="export-index.html" class="nav-link">Live Site</a>
+                    <a href="export-products.html" class="nav-link">Products</a>
+                    <a href="ai-ceo-dashboard.html" class="nav-link active">AI CEO</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="ai-dashboard">
+        <!-- AI Header -->
+        <div class="ai-header">
+            <h1>AI Chief Executive Officer</h1>
+            <p>Managing AfriTrade Global Export Platform</p>
+            <div class="ai-status">
+                <span>🟢 System Online</span>
+                <span>📊 Monitoring 50 Products</span>
+                <span>🌍 Tracking 15 Markets</span>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="ai-stats">
+            <div class="stat-card">
+                <h3>50</h3>
+                <p>Total Products</p>
+            </div>
+            <div class="stat-card">
+                <h3>5</h3>
+                <p>Categories</p>
+            </div>
+            <div class="stat-card">
+                <h3>25</h3>
+                <p>Suppliers</p>
+            </div>
+            <div class="stat-card">
+                <h3>15</h3>
+                <p>Export Markets</p>
+            </div>
+            <div class="stat-card">
+                <h3>0</h3>
+                <p>Pending Tasks</p>
+            </div>
+        </div>
+
+        <!-- AI Management Actions -->
+        <div class="ai-actions">
+            <!-- Product Management -->
+            <div class="action-card">
+                <h3>📦 Product Management</h3>
+                <button onclick="aiAddProduct()" class="btn-primary">Add New Product</button>
+                <button onclick="aiEditProducts()" class="btn-secondary">Edit Products</button>
+                <button onclick="aiRemoveProduct()" class="btn-danger">Remove Product</button>
+                <button onclick="aiUpdatePrices()" class="btn-secondary">Update Prices</button>
+            </div>
+
+            <!-- Content Management -->
+            <div class="action-card">
+                <h3>📝 Content Management</h3>
+                <button onclick="aiUpdateHomepage()" class="btn-primary">Update Homepage</button>
+                <button onclick="aiGenerateDescriptions()" class="btn-secondary">Generate Descriptions</button>
+                <button onclick="aiOptimizeSEO()" class="btn-secondary">Optimize SEO</button>
+                <button onclick="aiTranslateContent()" class="btn-secondary">Translate Content</button>
+            </div>
+
+            <!-- Analytics & Insights -->
+            <div class="action-card">
+                <h3>📊 Business Intelligence</h3>
+                <button onclick="aiSalesReport()" class="btn-primary">Sales Report</button>
+                <button onclick="aiMarketAnalysis()" class="btn-secondary">Market Analysis</button>
+                <button onclick="aiSupplierPerformance()" class="btn-secondary">Supplier Performance</button>
+                <button onclick="aiPredictTrends()" class="btn-secondary">Predict Trends</button>
+            </div>
+
+            <!-- System Operations -->
+            <div class="action-card">
+                <h3>⚙️ System Operations</h3>
+                <button onclick="aiBackupSystem()" class="btn-primary">Backup System</button>
+                <button onclick="aiUpdateInventory()" class="btn-secondary">Update Inventory</button>
+                <button onclick="aiCheckCompliance()" class="btn-secondary">Check Compliance</button>
+                <button onclick="aiGenerateReports()" class="btn-secondary">Generate Reports</button>
+            </div>
+        </div>
+
+        <!-- AI Command Console -->
+        <div class="ai-command">
+            <h3>🎯 AI Command Console</h3>
+            <input type="text" class="command-input" placeholder="Type your command... (e.g., 'add new wine product', 'update prices', 'generate monthly report')" id="aiCommand">
+            <button onclick="executeAICommand()" class="btn-primary" style="margin-top: 10px;">Execute Command</button>
+        </div>
+
+        <!-- AI Console Output -->
+        <div class="ai-console" id="aiConsole">
+            <div>> AI CEO System Initialized...</div>
+            <div>> Monitoring 50 export products...</div>
+            <div>> Ready for management commands...</div>
+        </div>
+
+        <!-- AI Suggestions -->
+        <div class="ai-suggestions">
+            <h3>💡 AI Recommendations</h3>
+            <div id="aiSuggestions">
+                <p>🔍 <strong>Trend Alert:</strong> High demand for organic wines in EU market</p>
+                <p>💰 <strong>Pricing Tip:</strong> Consider 10% price increase for premium crafts</p>
+                <p>🚀 <strong>Growth Opportunity:</strong> Expand fruit exports to Middle East</p>
+                <p>⚠️ <strong>Action Required:</strong> Update certification for 5 products</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/ai-ceo-manager.js"></script>
+</body>
+</html>
