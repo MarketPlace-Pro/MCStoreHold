@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Export Products - AfriTrade Global</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern-styles.css">
+    <link rel="stylesheet" href="css/expanding-menu.css">
     <style>
         /* Header styles */
         header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
@@ -40,27 +41,24 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container fade-in-up">
             <div class="header-content">
                 <div class="logo">
                     <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
                     <p>Africa to World Export Platform</p>
                 </div>
                 
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="export-index.html">Home</a></li>
-                        <li><a href="export-products.html" style="color: #ffd700; font-weight: bold;">Export Products</a></li>
-                        <li><a href="export-suppliers.html">African Suppliers</a></li>
-                        <li><a href="export-logistics.html">Global Logistics</a></li>
-                        <li><a href="export-certifications.html">Trade Compliance</a></li>
-                    </ul>
-                </nav>
+<nav class="main-nav">
+    <a href="export-index.html" class="nav-link">🏠 Home</a>
+    <a href="export-products.html" class="nav-link">📦 Products</a>
+    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
+    <a href="buyer-dashboard.html" class="nav-link">🛒 For Buyers</a>
+</nav>
                 
                 <div class="header-actions">
-                    <div class="currency-display">
-                        <strong>Rates:</strong> ZAR/EUR: 0.049
-                    </div>
+                    <span id="cartCount" style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: none; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">0</span>
+                    <a href="buyer-dashboard.html" class="btn-primary">View Cart</a>
+                </div>
                     <div class="user-actions">
                         <a href="supplier-login.html" class="account-btn">🏭 Supplier</a>
                         <a href="buyer-login.html" class="account-btn">🌍 Buyer</a>
@@ -71,7 +69,7 @@
     </header>
 
     <section class="category-filters">
-        <div class="container">
+        <div class="container fade-in-up">
             <h2 style="text-align: center; margin-bottom: 1.2rem;">Browse African Export Products</h2>
             <div class="filter-grid">
                 <div class="filter-card active" onclick="filterProducts('all')">
@@ -93,7 +91,7 @@
         </div>
     </section>
 
-    <main class="container">
+    <main class="container fade-in-up">
         <div class="products-header" style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0;">
             <h2 id="categoryTitle">All Export Products</h2>
         </div>
@@ -104,112 +102,15 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="container fade-in-up">
             <p style="text-align: center; padding: 2rem 0; color: #666;">&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
         </div>
     </footer>
+    <script src="js/export-all-products.js"></script>
+    <script src="js/export-products-with-cart.js"></script>
 
-    <script>
-        // Simple product data
-        const products = [
-            {
-                id: 1,
-                name: 'Stellenbosch Cabernet Sauvignon',
-                category: 'wine',
-                price: 150,
-                image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop',
-                supplier: 'Stellenbosch Vineyards',
-                moq: '120 bottles'
-            },
-            {
-                id: 2,
-                name: 'Chenin Blanc 2023',
-                category: 'wine', 
-                price: 130,
-                image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop',
-                supplier: 'Fairview Wines',
-                moq: '100 bottles'
-            },
-            {
-                id: 3,
-                name: 'Fresh Valencia Oranges',
-                category: 'fruits',
-                price: 8,
-                image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=400&h=300&fit=crop',
-                supplier: 'Citrus Farms SA',
-                moq: '10,000 kg'
-            },
-            {
-                id: 4,
-                name: 'Hass Avocados',
-                category: 'fruits',
-                price: 25,
-                image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop',
-                supplier: 'Green Gold Avocados',
-                moq: '5,000 kg'
-            },
-            {
-                id: 5,
-                name: 'Zulu Beaded Artwork',
-                category: 'crafts',
-                price: 250,
-                image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=300&fit=crop',
-                supplier: 'African Crafts Collective',
-                moq: '100 pieces'
-            },
-            {
-                id: 6,
-                name: 'Premium Rooibos Tea',
-                category: 'spices',
-                price: 120,
-                image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop',
-                supplier: 'Rooibos Limited',
-                moq: '500 kg'
-            }
-        ];
-
-        function loadProducts(category = 'all') {
-            const grid = document.getElementById('productsGrid');
-            const title = document.getElementById('categoryTitle');
-            
-            let filteredProducts = products;
-            if (category !== 'all') {
-                filteredProducts = products.filter(p => p.category === category);
-            }
-            
-            title.textContent = category === 'all' ? 'All Export Products' : 
-                              category === 'wine' ? '🍷 Wine & Spirits' :
-                              category === 'fruits' ? '🍋 Fruits & Agriculture' :
-                              category === 'crafts' ? '💎 Crafts & Minerals' : '🌶️ Spices & Foods';
-            
-            grid.innerHTML = filteredProducts.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p><strong>Supplier:</strong> ${product.supplier}</p>
-                        <p><strong>MOQ:</strong> ${product.moq}</p>
-                        <div class="price">R${product.price}</div>
-                        <button class="cta-button" style="width: 100%; margin-top: 1rem;">Export Inquiry</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterProducts(category) {
-            // Update active filter
-            document.querySelectorAll('.filter-card').forEach(card => card.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            // Load products
-            loadProducts(category);
-        }
-
-        // Load products when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadProducts();
-            console.log('Products loaded successfully!');
-        });
-    </script>
+    <script src="js/unified-navigation.js"></script>
+    <script src="js/simple-cart.js"></script>
 </body>
 </html>
+<script src="js/cart-hotfix.js"></script>
