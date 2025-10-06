@@ -368,3 +368,71 @@ function aiSupplierPerformance() { window.aiCEO?.aiSupplierPerformance(); }
 function aiBackupSystem() { window.aiCEO?.aiBackupSystem(); }
 function aiUpdateInventory() { window.aiCEO?.aiUpdateInventory(); }
 function executeAICommand() { window.aiCEO?.executeAICommand(); }
+
+// Add Auto-Pilot commands to the help system
+function showHelp() {
+    this.log('🆘 AVAILABLE COMMANDS:');
+    this.log('  - "add product" (Add new product)');
+    this.log('  - "edit product" (Modify existing)');
+    this.log('  - "remove product" (Delete product)');
+    this.log('  - "update prices" (Price adjustment)');
+    this.log('  - "sales report" (Business analytics)');
+    this.log('  - "market analysis" (Market insights)');
+    this.log('  - "backup system" (Data backup)');
+    this.log('🤖 AUTO-PILOT COMMANDS:');
+    this.log('  - "enable autopilot" (Start AI automation)');
+    this.log('  - "run autoscan" (Force data scan)');
+    this.log('  - "execute tasks" (Run all auto-tasks)');
+}
+
+// Update command execution to handle auto-pilot commands
+function executeAICommand() {
+    const commandInput = document.getElementById('aiCommand');
+    if (!commandInput) return;
+    
+    const command = commandInput.value.trim().toLowerCase();
+    if (!command) return;
+    
+    this.log('🎯 COMMAND: ' + command);
+    
+    // Process commands
+    if (command.includes('add product')) {
+        this.aiAddProduct();
+    } else if (command.includes('edit product')) {
+        this.aiEditProducts();
+    } else if (command.includes('remove product')) {
+        this.aiRemoveProduct();
+    } else if (command.includes('update price') || command.includes('price')) {
+        this.aiUpdatePrices();
+    } else if (command.includes('sales report') || command.includes('report')) {
+        this.aiSalesReport();
+    } else if (command.includes('market analysis') || command.includes('market')) {
+        this.aiMarketAnalysis();
+    } else if (command.includes('backup')) {
+        this.aiBackupSystem();
+    } else if (command.includes('enable autopilot') || command.includes('autopilot')) {
+        if (window.aiAutoPilot) {
+            window.aiAutoPilot.toggleAutoPilot();
+        } else {
+            this.log('❌ Auto-Pilot not loaded yet');
+        }
+    } else if (command.includes('run autoscan') || command.includes('autoscan')) {
+        if (window.aiAutoPilot) {
+            window.aiAutoPilot.performAutoScan();
+        } else {
+            this.log('❌ Auto-Pilot not loaded yet');
+        }
+    } else if (command.includes('execute tasks')) {
+        if (window.aiAutoPilot) {
+            window.aiAutoPilot.executeAllAutoTasks();
+        } else {
+            this.log('❌ Auto-Pilot not loaded yet');
+        }
+    } else if (command.includes('help')) {
+        this.showHelp();
+    } else {
+        this.log('❌ Unknown command. Type "help" for options.');
+    }
+    
+    commandInput.value = '';
+}
