@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Portal - AfriTrade Global</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .supplier-dashboard {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .supplier-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .supplier-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .supplier-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .product-list {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="export-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🌍 AfriTrade Global</h1>
+                    <span>Supplier Portal</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="export-index.html" class="nav-link">Home</a>
+                    <a href="export-products.html" class="nav-link">Marketplace</a>
+                    <a href="supplier-portal.html" class="nav-link active">Supplier Portal</a>
+                    <a href="buyer-dashboard.html" class="nav-link">Buyer Dashboard</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="openSupplierLogin()">Supplier Login</button>
+                    <button class="btn-primary" onclick="openRegistration()">Join as Supplier</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="supplier-dashboard">
+        <!-- Supplier Stats -->
+        <div class="supplier-stats">
+            <div class="stat-card">
+                <h3 id="supplierProductCount">0</h3>
+                <p>Your Products</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="supplierOrdersCount">0</h3>
+                <p>Total Orders</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="supplierRevenue">R0</h3>
+                <p>Total Revenue</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="supplierRating">0.0</h3>
+                <p>Supplier Rating</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="supplier-actions">
+            <div class="action-card">
+                <h3>📦 Product Management</h3>
+                <button onclick="openAddProductForm()" class="btn-primary">Add New Product</button>
+                <button onclick="viewMyProducts()" class="btn-secondary">View My Products</button>
+                <button onclick="updateInventory()" class="btn-secondary">Update Inventory</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📊 Business Analytics</h3>
+                <button onclick="viewSalesReport()" class="btn-primary">Sales Report</button>
+                <button onclick="viewOrderHistory()" class="btn-secondary">Order History</button>
+                <button onclick="analyzePerformance()" class="btn-secondary">Performance Analytics</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📋 Order Management</h3>
+                <button onclick="viewPendingOrders()" class="btn-primary">Pending Orders</button>
+                <button onclick="viewCompletedOrders()" class="btn-secondary">Completed Orders</button>
+                <button onclick="manageShipping()" class="btn-secondary">Shipping Management</button>
+            </div>
+
+            <div class="action-card">
+                <h3>⚙️ Account Settings</h3>
+                <button onclick="editSupplierProfile()" class="btn-primary">Edit Profile</button>
+                <button onclick="manageDocuments()" class="btn-secondary">Manage Documents</button>
+                <button onclick="viewCommissions()" class="btn-secondary">Commission Report</button>
+            </div>
+        </div>
+
+        <!-- Add Product Form -->
+        <div class="supplier-form" id="addProductForm" style="display: none;">
+            <h3>Add New Product</h3>
+            <form id="newProductForm" onsubmit="submitNewProduct(event)">
+                <div class="form-grid">
+                    <div>
+                        <label>Product Name *</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div>
+                        <label>Category *</label>
+                        <select id="productCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="wine">🍷 Wine & Spirits</option>
+                            <option value="fruits">🍋 Fruits & Agriculture</option>
+                            <option value="crafts">💎 Crafts & Minerals</option>
+                            <option value="textiles">🧥 Textiles & Fashion</option>
+                            <option value="spices">🌶️ Spices & Foods</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Price (R) *</label>
+                        <input type="number" id="productPrice" step="0.01" required>
+                    </div>
+                    <div>
+                        <label>Minimum Order Quantity *</label>
+                        <input type="number" id="productMOQ" required>
+                    </div>
+                    <div>
+                        <label>Unit *</label>
+                        <select id="productUnit" required>
+                            <option value="bottle">Bottle</option>
+                            <option value="kilogram">Kilogram</option>
+                            <option value="piece">Piece</option>
+                            <option value="meter">Meter</option>
+                            <option value="liter">Liter</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Origin *</label>
+                        <input type="text" id="productOrigin" required>
+                    </div>
+                </div>
+                <div>
+                    <label>Description *</label>
+                    <textarea id="productDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label>Export Markets</label>
+                        <div>
+                            <input type="checkbox" id="marketEU" value="EU"> <label for="marketEU">EU</label>
+                            <input type="checkbox" id="marketUSA" value="USA"> <label for="marketUSA">USA</label>
+                            <input type="checkbox" id="marketChina" value="China"> <label for="marketChina">China</label>
+                            <input type="checkbox" id="marketMiddleEast" value="Middle East"> <label for="marketMiddleEast">Middle East</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Certifications</label>
+                        <div>
+                            <input type="checkbox" id="certOrganic" value="Organic"> <label for="certOrganic">Organic</label>
+                            <input type="checkbox" id="certFairTrade" value="Fair Trade"> <label for="certFairTrade">Fair Trade</label>
+                            <input type="checkbox" id="certGlobalGAP" value="GlobalGAP"> <label for="certGlobalGAP">GlobalGAP</label>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <button type="submit" class="btn-primary">Add Product</button>
+                    <button type="button" class="btn-secondary" onclick="closeAddProductForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- My Products List -->
+        <div class="product-list" id="myProductsSection" style="display: none;">
+            <h3>My Products</h3>
+            <div id="myProductsList"></div>
+        </div>
+    </div>
+
+    <script src="js/supplier-system.js"></script>
+</body>
+</html>
