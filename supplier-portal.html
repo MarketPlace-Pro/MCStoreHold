@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supplier Portal - AfriTrade Global</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern-styles.css">
     <style>
         .supplier-dashboard {
             padding: 2rem;
@@ -45,7 +45,7 @@
 </head>
 <body>
     <header class="export-header">
-        <div class="container">
+        <div class="container fade-in-up">
             <div class="header-content">
                 <div class="logo">
                     <h1>🌍 AfriTrade Global</h1>
@@ -58,7 +58,7 @@
                     <a href="buyer-dashboard.html" class="nav-link">Buyer Dashboard</a>
                 </nav>
                 <div class="header-actions">
-                    <button class="btn-secondary" onclick="openSupplierLogin()">Supplier Login</button>
+                    <button class="btn-secondary shadow-glow" onclick="openSupplierLogin()">Supplier Login</button>
                     <button class="btn-primary" onclick="openRegistration()">Join as Supplier</button>
                 </div>
             </div>
@@ -68,19 +68,19 @@
     <div class="supplier-dashboard">
         <!-- Supplier Stats -->
         <div class="supplier-stats">
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="supplierProductCount">0</h3>
                 <p>Your Products</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="supplierOrdersCount">0</h3>
                 <p>Total Orders</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="supplierRevenue">R0</h3>
                 <p>Total Revenue</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="supplierRating">0.0</h3>
                 <p>Supplier Rating</p>
             </div>
@@ -88,32 +88,32 @@
 
         <!-- Quick Actions -->
         <div class="supplier-actions">
-            <div class="action-card">
+            <div class="action-card fade-in-up">
                 <h3>📦 Product Management</h3>
                 <button onclick="openAddProductForm()" class="btn-primary">Add New Product</button>
-                <button onclick="viewMyProducts()" class="btn-secondary">View My Products</button>
-                <button onclick="updateInventory()" class="btn-secondary">Update Inventory</button>
+                <button onclick="viewMyProducts()" class="btn-secondary shadow-glow">View My Products</button>
+                <button onclick="updateInventory()" class="btn-secondary shadow-glow">Update Inventory</button>
             </div>
 
-            <div class="action-card">
+            <div class="action-card fade-in-up">
                 <h3>📊 Business Analytics</h3>
                 <button onclick="viewSalesReport()" class="btn-primary">Sales Report</button>
-                <button onclick="viewOrderHistory()" class="btn-secondary">Order History</button>
-                <button onclick="analyzePerformance()" class="btn-secondary">Performance Analytics</button>
+                <button onclick="viewOrderHistory()" class="btn-secondary shadow-glow">Order History</button>
+                <button onclick="analyzePerformance()" class="btn-secondary shadow-glow">Performance Analytics</button>
             </div>
 
-            <div class="action-card">
+            <div class="action-card fade-in-up">
                 <h3>📋 Order Management</h3>
                 <button onclick="viewPendingOrders()" class="btn-primary">Pending Orders</button>
-                <button onclick="viewCompletedOrders()" class="btn-secondary">Completed Orders</button>
-                <button onclick="manageShipping()" class="btn-secondary">Shipping Management</button>
+                <button onclick="viewCompletedOrders()" class="btn-secondary shadow-glow">Completed Orders</button>
+                <button onclick="manageShipping()" class="btn-secondary shadow-glow">Shipping Management</button>
             </div>
 
-            <div class="action-card">
+            <div class="action-card fade-in-up">
                 <h3>⚙️ Account Settings</h3>
                 <button onclick="editSupplierProfile()" class="btn-primary">Edit Profile</button>
-                <button onclick="manageDocuments()" class="btn-secondary">Manage Documents</button>
-                <button onclick="viewCommissions()" class="btn-secondary">Commission Report</button>
+                <button onclick="manageDocuments()" class="btn-secondary shadow-glow">Manage Documents</button>
+                <button onclick="viewCommissions()" class="btn-secondary shadow-glow">Commission Report</button>
             </div>
         </div>
 
@@ -185,7 +185,7 @@
                 </div>
                 <div style="margin-top: 1rem;">
                     <button type="submit" class="btn-primary">Add Product</button>
-                    <button type="button" class="btn-secondary" onclick="closeAddProductForm()">Cancel</button>
+                    <button type="button" class="btn-secondary shadow-glow" onclick="closeAddProductForm()">Cancel</button>
                 </div>
             </form>
         </div>

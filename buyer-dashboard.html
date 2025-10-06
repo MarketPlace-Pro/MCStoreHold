@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buyer Dashboard - AfriTrade Global</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern-styles.css">
     <style>
         .buyer-dashboard {
             padding: 2rem;
@@ -44,7 +44,7 @@
 </head>
 <body>
     <header class="export-header">
-        <div class="container">
+        <div class="container fade-in-up">
             <div class="header-content">
                 <div class="logo">
                     <h1>🌍 AfriTrade Global</h1>
@@ -58,7 +58,7 @@
                 </nav>
                 <div class="header-actions">
                     <span id="cartCount">0</span> 🛒
-                    <button class="btn-primary" onclick="openCheckout()">Checkout</button>
+                    <button class="btn-primary shadow-glow" onclick="openCheckout()">Checkout</button>
                 </div>
             </div>
         </div>
@@ -67,19 +67,19 @@
     <div class="buyer-dashboard">
         <!-- Buyer Stats -->
         <div class="buyer-stats">
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="totalOrders">0</h3>
                 <p>Total Orders</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="pendingOrders">0</h3>
                 <p>Pending Orders</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="totalSpent">R0</h3>
                 <p>Total Spent</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card fade-in-up">
                 <h3 id="savedProducts">0</h3>
                 <p>Saved Products</p>
             </div>
@@ -93,7 +93,7 @@
             </div>
             <div style="text-align: right; margin-top: 1rem;">
                 <h4>Total: <span id="cartTotal">R0.00</span></h4>
-                <button onclick="openCheckout()" class="btn-primary">Proceed to Checkout</button>
+                <button onclick="openCheckout()" class="btn-primary shadow-glow">Proceed to Checkout</button>
             </div>
         </div>
 
@@ -124,7 +124,7 @@
                     <div id="quickPrice">R0.00</div>
                 </div>
                 <div>
-                    <button onclick="addQuickToCart()" class="btn-primary">Add to Cart</button>
+                    <button onclick="addQuickToCart()" class="btn-primary shadow-glow">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
         <div style="background: white; margin: 5% auto; padding: 2rem; border-radius: 10px; max-width: 600px;">
             <h3>Checkout</h3>
             <div id="checkoutSummary"></div>
-            <button onclick="processOrder()" class="btn-primary">Place Order</button>
+            <button onclick="processOrder()" class="btn-primary shadow-glow">Place Order</button>
             <button onclick="closeCheckout()" class="btn-secondary">Cancel</button>
         </div>
     </div>
