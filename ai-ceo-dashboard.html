@@ -143,35 +143,35 @@
             <!-- Product Management -->
             <div class="action-card">
                 <h3>📦 Product Management</h3>
-                <button onclick="aiAddProduct()" class="btn-primary">Add New Product</button>
-                <button onclick="aiEditProducts()" class="btn-secondary">Edit Products</button>
-                <button onclick="aiRemoveProduct()" class="btn-danger">Remove Product</button>
-                <button onclick="aiUpdatePrices()" class="btn-secondary">Update Prices</button>
+                <button id="aiAddProduct" onclick="aiAddProduct()" class="btn-primary">Add New Product</button>
+                <button id="aiEditProducts" onclick="aiEditProducts()" class="btn-secondary">Edit Products</button>
+                <button id="aiRemoveProduct" onclick="aiRemoveProduct()" class="btn-danger">Remove Product</button>
+                <button id="aiUpdatePrices" onclick="aiUpdatePrices()" class="btn-secondary">Update Prices</button>
             </div>
 
             <!-- Content Management -->
             <div class="action-card">
                 <h3>📝 Content Management</h3>
-                <button onclick="aiUpdateHomepage()" class="btn-primary">Update Homepage</button>
-                <button onclick="aiGenerateDescriptions()" class="btn-secondary">Generate Descriptions</button>
-                <button onclick="aiOptimizeSEO()" class="btn-secondary">Optimize SEO</button>
+                <button id="aiUpdateHomepage" onclick="aiUpdateHomepage()" class="btn-primary">Update Homepage</button>
+                <button id="aiGenerateDescriptions" onclick="aiGenerateDescriptions()" class="btn-secondary">Generate Descriptions</button>
+                <button id="aiOptimizeSEO" onclick="aiOptimizeSEO()" class="btn-secondary">Optimize SEO</button>
                 <button onclick="aiTranslateContent()" class="btn-secondary">Translate Content</button>
             </div>
 
             <!-- Analytics & Insights -->
             <div class="action-card">
                 <h3>📊 Business Intelligence</h3>
-                <button onclick="aiSalesReport()" class="btn-primary">Sales Report</button>
-                <button onclick="aiMarketAnalysis()" class="btn-secondary">Market Analysis</button>
-                <button onclick="aiSupplierPerformance()" class="btn-secondary">Supplier Performance</button>
+                <button id="aiSalesReport" onclick="aiSalesReport()" class="btn-primary">Sales Report</button>
+                <button id="aiMarketAnalysis" onclick="aiMarketAnalysis()" class="btn-secondary">Market Analysis</button>
+                <button id="aiSupplierPerformance" onclick="aiSupplierPerformance()" class="btn-secondary">Supplier Performance</button>
                 <button onclick="aiPredictTrends()" class="btn-secondary">Predict Trends</button>
             </div>
 
             <!-- System Operations -->
             <div class="action-card">
                 <h3>⚙️ System Operations</h3>
-                <button onclick="aiBackupSystem()" class="btn-primary">Backup System</button>
-                <button onclick="aiUpdateInventory()" class="btn-secondary">Update Inventory</button>
+                <button id="aiBackupSystem" onclick="aiBackupSystem()" class="btn-primary">Backup System</button>
+                <button id="aiUpdateInventory" onclick="aiUpdateInventory()" class="btn-secondary">Update Inventory</button>
                 <button onclick="aiCheckCompliance()" class="btn-secondary">Check Compliance</button>
                 <button onclick="aiGenerateReports()" class="btn-secondary">Generate Reports</button>
             </div>
@@ -181,7 +181,7 @@
         <div class="ai-command">
             <h3>🎯 AI Command Console</h3>
             <input type="text" class="command-input" placeholder="Type your command... (e.g., 'add new wine product', 'update prices', 'generate monthly report')" id="aiCommand">
-            <button onclick="executeAICommand()" class="btn-primary" style="margin-top: 10px;">Execute Command</button>
+            <button id="executeCommand" onclick="executeAICommand()" class="btn-primary" style="margin-top: 10px;">Execute Command</button>
         </div>
 
         <!-- AI Console Output -->
@@ -204,6 +204,6 @@
     </div>
 
     <script src="js/export-all-products.js"></script>
-    <script src="js/ai-ceo-integration-fixed.js"></script>
+    <script src="js/ai-ceo-fixed.js"></script>
 </body>
 </html>
