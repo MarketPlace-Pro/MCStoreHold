@@ -1,13 +1,12 @@
-// Unified Navigation System
+// Unified Navigation System - Public Version (No AI CEO)
 class UnifiedNavigation {
     constructor() {
         this.pages = {
             'home': 'export-index.html',
             'products': 'export-products.html', 
             'suppliers': 'supplier-portal.html',
-            'buyers': 'buyer-dashboard.html',
-            'ai-ceo': 'ai-ceo-dashboard.html',
-            'cart': 'buyer-dashboard.html#cart' // Link to cart section
+            'buyers': 'buyer-dashboard.html'
+            // AI CEO removed from public navigation
         };
         this.init();
     }
@@ -35,7 +34,6 @@ class UnifiedNavigation {
             <a href="${this.pages.products}" class="nav-link ${currentPage === 'products' ? 'active' : ''}">📦 Products</a>
             <a href="${this.pages.suppliers}" class="nav-link ${currentPage === 'suppliers' ? 'active' : ''}">🏭 For Suppliers</a>
             <a href="${this.pages.buyers}" class="nav-link ${currentPage === 'buyers' ? 'active' : ''}">🛒 For Buyers</a>
-            <a href="${this.pages['ai-ceo']}" class="nav-link ${currentPage === 'ai-ceo' ? 'active' : ''}">🤖 AI CEO</a>
         `;
     }
 
@@ -45,7 +43,6 @@ class UnifiedNavigation {
         if (path.includes('export-products')) return 'products';
         if (path.includes('supplier-portal')) return 'suppliers';
         if (path.includes('buyer-dashboard')) return 'buyers';
-        if (path.includes('ai-ceo-dashboard')) return 'ai-ceo';
         return 'home';
     }
 

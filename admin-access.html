@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - AfriTrade Global</title>
+    <link rel="stylesheet" href="modern-styles.css">
+    <style>
+        .admin-login {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-hero);
+        }
+        .admin-card {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .admin-card h1 {
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+        }
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login">
+        <div class="admin-card fade-in-up">
+            <h1>🔒 Admin Access</h1>
+            <p>Internal management tools</p>
+            <input type="password" class="password-input" placeholder="Enter admin password" id="adminPassword">
+            <button onclick="checkAdminAccess()" class="btn-primary large">Access Admin Tools</button>
+            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--gray);">
+                Authorized personnel only
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function checkAdminAccess() {
+            const password = document.getElementById('adminPassword').value;
+            // Simple password check - in production, use proper authentication
+            if (password === 'afritrade2024' || password === 'admin') {
+                window.location.href = 'ai-ceo-dashboard.html';
+            } else {
+                alert('Invalid access credentials');
+            }
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAdminAccess();
+            }
+        });
+    </script>
+</body>
+</html>
