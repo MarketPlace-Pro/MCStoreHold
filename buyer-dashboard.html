@@ -25,7 +25,7 @@
             margin-bottom: 2rem;
         }
         .cart-items {
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
             padding-right: 1rem;
         }
@@ -36,9 +36,40 @@
             padding: 1.5rem;
             border-bottom: 1px solid #e2e8f0;
             gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .cart-item:hover {
+            background: #f8fafc;
         }
         .cart-item:last-child {
             border-bottom: none;
+        }
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 2px solid #e2e8f0;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        .cart-item-supplier {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .cart-item-moq {
+            color: #f59e0b;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
         .quantity-controls {
             display: flex;
@@ -47,6 +78,7 @@
             background: #f8fafc;
             padding: 0.5rem;
             border-radius: var(--radius-md);
+            margin-top: 0.5rem;
         }
         .quantity-btn {
             background: white;
@@ -74,6 +106,21 @@
             font-weight: 600;
             min-width: 4rem;
             text-align: center;
+            font-size: 0.9rem;
+        }
+        .cart-item-price {
+            text-align: right;
+            min-width: 120px;
+        }
+        .unit-price {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .item-total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
         }
         .cart-summary {
             background: var(--gradient-primary);
@@ -82,20 +129,45 @@
             border-radius: var(--radius-lg);
             margin-top: 1.5rem;
         }
-        .quick-order-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr auto;
-            gap: 1rem;
-            align-items: end;
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
         }
-        @media (max-width: 768px) {
-            .quick-order-grid {
-                grid-template-columns: 1fr;
-            }
-            .cart-item {
-                flex-direction: column;
-                gap: 1rem;
-            }
+        .empty-cart-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        .ai-suggestions {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1rem;
+        }
+        .ai-suggestion-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .ai-suggestion-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* Cart Animations */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
     </style>
 </head>
@@ -108,7 +180,10 @@
                     <span>Buyer Dashboard</span>
                 </div>
                 <nav class="main-nav">
-                    <!-- Navigation will be loaded by unified-navigation.js -->
+                    <a href="export-index.html" class="nav-link">🏠 Home</a>
+                    <a href="export-products.html" class="nav-link">📦 Products</a>
+                    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
+                    <a href="buyer-dashboard-enhanced.html" class="nav-link active">🛒 For Buyers</a>
                 </nav>
                 <div class="header-actions">
                     <span id="cartCount" style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: none; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">0</span>
@@ -126,70 +201,66 @@
                 <p>In Your Cart</p>
             </div>
             <div class="stat-card">
-                <h3 id="totalOrders">0</h3>
-                <p>Total Orders</p>
+                <h3 id="cartTotalItems">0</h3>
+                <p>Total Units</p>
             </div>
             <div class="stat-card">
-                <h3 id="pendingOrders">0</h3>
-                <p>Pending Orders</p>
+                <h3 id="cartValue">R0</h3>
+                <p>Cart Value</p>
             </div>
             <div class="stat-card">
-                <h3 id="totalSpent">R0</h3>
-                <p>Total Spent</p>
+                <h3 id="estimatedShipping">-</h3>
+                <p>Est. Shipping</p>
             </div>
         </div>
 
         <!-- Shopping Cart -->
         <div class="order-section">
-            <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <h3>🛒 Your Shopping Cart</h3>
-                <button onclick="enhancedCart.clearCart()" class="btn-danger" style="padding: 0.5rem 1rem;">Clear Cart</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button onclick="clearCart()" class="btn-danger">Clear Cart</button>
+                    <button onclick="continueShopping()" class="btn-secondary">Add More Items</button>
+                </div>
             </div>
+            
             <div class="cart-items" id="cartItems">
                 <!-- Cart items will be loaded here -->
             </div>
             
+            <!-- AI Suggestions -->
+            <div class="ai-suggestions" id="aiSuggestions" style="display: none;">
+                <h4 style="margin-bottom: 1rem; color: var(--primary);">💡 AI Suggestions</h4>
+                <div id="aiSuggestionsList">
+                    <!-- AI suggestions will appear here -->
+                </div>
+            </div>
+            
             <div class="cart-summary">
-                <div style="display: flex; justify-content: between; align-items: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <h4 style="margin: 0; color: white;">Order Total</h4>
-                        <p style="margin: 0; opacity: 0.9;" id="cartItemsCountSummary">0 items</p>
+                        <h4 style="margin: 0; color: white;">Order Summary</h4>
+                        <p style="margin: 0; opacity: 0.9;" id="cartSummaryText">0 items in cart</p>
                     </div>
                     <div style="text-align: right;">
                         <h2 style="margin: 0; color: white;" id="cartTotal">R0.00</h2>
-                        <button onclick="enhancedCart.proceedToCheckout()" 
+                        <p style="margin: 0.25rem 0; opacity: 0.9; font-size: 0.9rem;" id="shippingNote">+ Shipping to be calculated</p>
+                        <button onclick="proceedToCheckout()" 
                                 class="btn-primary" 
-                                style="background: white; color: var(--primary); margin-top: 0.5rem;">
-                            Proceed to Checkout
+                                style="background: white; color: var(--primary); margin-top: 0.5rem; font-weight: 600;">
+                            🚀 Proceed to Checkout
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Order -->
+        <!-- Quick Reorder -->
         <div class="order-section">
-            <h3>⚡ Quick Order</h3>
-            <p style="color: #64748b; margin-bottom: 1.5rem;">Quickly add products to your cart</p>
-            
-            <div class="quick-order-grid">
-                <div>
-                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Select Product</label>
-                    <select id="quickProductSelect" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: var(--radius-md);">
-                        <option value="">Choose a product...</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Quantity</label>
-                    <input type="number" id="quickQuantity" value="1" min="1" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: var(--radius-md);">
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Unit Price</label>
-                    <div id="quickPrice" style="padding: 0.75rem; background: #f8fafc; border-radius: var(--radius-md); text-align: center; font-weight: 600;">R0.00</div>
-                </div>
-                <div>
-                    <button onclick="enhancedCart.quickAddToCart()" class="btn-primary" style="height: fit-content;">Add to Cart</button>
-                </div>
+            <h3>⚡ Quick Reorder</h3>
+            <p style="color: #64748b; margin-bottom: 1.5rem;">Quickly add frequently ordered products</p>
+            <div id="quickReorder" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <!-- Quick reorder items will appear here -->
             </div>
         </div>
 
@@ -203,6 +274,391 @@
     </div>
 
     <script src="js/unified-navigation.js"></script>
-    <script src="js/buyer-cart-enhanced.js"></script>
+    <script>
+        // Enhanced Buyer Cart Management
+        class EnhancedBuyerCart {
+            constructor() {
+                this.cart = JSON.parse(localStorage.getItem('simple_cart')) || [];
+                this.orders = JSON.parse(localStorage.getItem('buyer_orders')) || [];
+                this.init();
+            }
+
+            init() {
+                console.log('🛒 Enhanced Buyer Cart Initialized');
+                this.renderCartItems();
+                this.updateCartSummary();
+                this.loadOrderHistory();
+                this.generateAISuggestions();
+                this.setupQuickReorder();
+            }
+
+            renderCartItems() {
+                const container = document.getElementById('cartItems');
+                if (!container) return;
+
+                if (this.cart.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon">🛒</div>
+                            <h3>Your cart is empty</h3>
+                            <p>Browse our premium African export products and add items to get started.</p>
+                            <a href="export-products.html" class="btn-primary" style="margin-top: 1rem;">Browse Products</a>
+                        </div>
+                    `;
+                    document.getElementById('aiSuggestions').style.display = 'none';
+                    return;
+                }
+
+                container.innerHTML = this.cart.map(item => `
+                    <div class="cart-item" data-product-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image" 
+                             onerror="this.src='https://images.unsplash.com/photo-1563013546-73edefabf54c?w=150&h=150&fit=crop'">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-supplier">Supplier: ${item.supplier}</div>
+                            <div class="cart-item-moq">MOQ: ${item.minOrder} ${item.unit}s</div>
+                            <div class="quantity-controls">
+                                <button onclick="enhancedCart.updateQuantity('${item.id}', ${item.quantity - 1})" 
+                                        class="quantity-btn" ${item.quantity <= item.minOrder ? 'disabled' : ''}>
+                                    −
+                                </button>
+                                <span class="quantity-display">${item.quantity} ${item.unit}s</span>
+                                <button onclick="enhancedCart.updateQuantity('${item.id}', ${item.quantity + 1})" 
+                                        class="quantity-btn">
+                                    +
+                                </button>
+                                <span style="margin-left: 1rem; color: #64748b; font-size: 0.9rem;">
+                                    R${item.price}/${item.unit}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="cart-item-price">
+                            <div class="unit-price">R${item.price}/${item.unit}</div>
+                            <div class="item-total">R${(item.price * item.quantity).toLocaleString()}</div>
+                            <button onclick="enhancedCart.removeItem('${item.id}')" 
+                                    class="btn-danger" 
+                                    style="margin-top: 0.5rem; padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Show AI suggestions
+                document.getElementById('aiSuggestions').style.display = 'block';
+            }
+
+            updateQuantity(productId, newQuantity) {
+                const item = this.cart.find(item => item.id === productId);
+                if (!item) return;
+
+                if (newQuantity < item.minOrder) {
+                    this.showNotification(`Minimum order quantity is ${item.minOrder} ${item.unit}s`, 'warning');
+                    return;
+                }
+
+                item.quantity = newQuantity;
+                this.saveCart();
+                this.renderCartItems();
+                this.updateCartSummary();
+                this.generateAISuggestions();
+                this.showNotification(`Updated ${item.name} quantity to ${newQuantity}`, 'success');
+            }
+
+            removeItem(productId) {
+                this.cart = this.cart.filter(item => item.id !== productId);
+                this.saveCart();
+                this.renderCartItems();
+                this.updateCartSummary();
+                this.generateAISuggestions();
+                this.showNotification('Item removed from cart', 'info');
+            }
+
+            updateCartSummary() {
+                const total = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+                const totalProducts = this.cart.length;
+
+                document.getElementById('cartTotal').textContent = `R${total.toLocaleString()}`;
+                document.getElementById('cartItemsCount').textContent = `${totalProducts} items`;
+                document.getElementById('cartTotalItems').textContent = totalItems;
+                document.getElementById('cartValue').textContent = `R${total.toLocaleString()}`;
+                document.getElementById('cartSummaryText').textContent = `${totalItems} units across ${totalProducts} products`;
+
+                // Update header cart count
+                const headerCartCount = document.getElementById('cartCount');
+                if (headerCartCount) {
+                    headerCartCount.textContent = totalProducts;
+                    headerCartCount.style.display = totalProducts > 0 ? 'flex' : 'none';
+                }
+
+                // Estimate shipping (simple calculation)
+                const shipping = total > 0 ? Math.max(500, total * 0.05) : 0;
+                document.getElementById('estimatedShipping').textContent = `R${Math.round(shipping).toLocaleString()}`;
+            }
+
+            // 🧠 AI SUGGESTIONS
+            generateAISuggestions() {
+                const suggestionsContainer = document.getElementById('aiSuggestionsList');
+                if (!suggestionsContainer || this.cart.length === 0) return;
+
+                const suggestions = [];
+                
+                // Suggestion 1: Bulk discount opportunity
+                const highQuantityItems = this.cart.filter(item => item.quantity > item.minOrder * 2);
+                if (highQuantityItems.length > 0) {
+                    suggestions.push({
+                        icon: '💰',
+                        text: `Bulk discount available for ${highQuantityItems.length} items - contact for better pricing`,
+                        action: 'contactSupplier'
+                    });
+                }
+
+                // Suggestion 2: Related products
+                if (this.cart.some(item => item.category === 'wine')) {
+                    suggestions.push({
+                        icon: '🍷',
+                        text: 'Wine buyers often add cheese and olives - browse complementary products',
+                        action: 'browseRelated'
+                    });
+                }
+
+                // Suggestion 3: Shipping optimization
+                if (this.cart.length >= 3) {
+                    suggestions.push({
+                        icon: '📦',
+                        text: 'Consolidate shipping by ordering all items together for better rates',
+                        action: 'optimizeShipping'
+                    });
+                }
+
+                // Suggestion 4: MOQ optimization
+                const nearMOQItems = this.cart.filter(item => item.quantity === item.minOrder);
+                if (nearMOQItems.length > 0) {
+                    suggestions.push({
+                        icon: '⚡',
+                        text: `Increase quantity for ${nearMOQItems.length} items to get better unit pricing`,
+                        action: 'increaseQuantity'
+                    });
+                }
+
+                suggestionsContainer.innerHTML = suggestions.map(suggestion => `
+                    <div class="ai-suggestion-item">
+                        <span class="ai-suggestion-icon">${suggestion.icon}</span>
+                        <span style="flex: 1; font-size: 0.9rem;">${suggestion.text}</span>
+                        <button onclick="handleAISuggestion('${suggestion.action}')" 
+                                class="btn-secondary" 
+                                style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
+                            Apply
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            setupQuickReorder() {
+                const container = document.getElementById('quickReorder');
+                if (!container) return;
+
+                // Get frequently ordered items from order history
+                const frequentProducts = this.getFrequentProducts();
+                
+                if (frequentProducts.length === 0) {
+                    container.innerHTML = '<p style="color: #64748b; text-align: center; grid-column: 1 / -1;">No reorder history yet</p>';
+                    return;
+                }
+
+                container.innerHTML = frequentProducts.map(product => `
+                    <div style="background: white; padding: 1rem; border-radius: var(--radius-lg); border: 1px solid #e2e8f0; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">${this.getCategoryIcon(product.category)}</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">${product.name}</div>
+                        <div style="color: #64748b; font-size: 0.8rem; margin-bottom: 0.5rem;">MOQ: ${product.minOrder} ${product.unit}s</div>
+                        <button onclick="quickAddToCart('${product.id}')" 
+                                class="btn-primary" 
+                                style="width: 100%; padding: 0.5rem; font-size: 0.8rem;">
+                            Add ${product.minOrder} ${product.unit}s
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            getFrequentProducts() {
+                // Simple logic to get frequently ordered products
+                // In a real app, this would analyze order history
+                return [
+                    { id: 'exp-wine-001', name: 'Stellenbosch Cabernet', category: 'wine', minOrder: 120, unit: 'bottle' },
+                    { id: 'exp-fruit-001', name: 'Valencia Oranges', category: 'fruits', minOrder: 10000, unit: 'kilogram' },
+                    { id: 'exp-spice-001', name: 'Rooibos Tea', category: 'spices', minOrder: 500, unit: 'kilogram' }
+                ];
+            }
+
+            getCategoryIcon(category) {
+                const icons = {
+                    'wine': '🍷',
+                    'fruits': '🍋',
+                    'crafts': '💎',
+                    'textiles': '🧥',
+                    'spices': '🌶️'
+                };
+                return icons[category] || '📦';
+            }
+
+            loadOrderHistory() {
+                const container = document.getElementById('orderHistory');
+                if (!container) return;
+
+                if (this.orders.length === 0) {
+                    container.innerHTML = '<p style="color: #64748b; text-align: center; padding: 2rem;">No orders yet. Your order history will appear here.</p>';
+                    return;
+                }
+
+                container.innerHTML = this.orders.map(order => `
+                    <div style="background: white; padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <div>
+                                <h4 style="margin: 0 0 0.5rem 0;">Order #${order.id}</h4>
+                                <p style="color: #64748b; margin: 0;">Date: ${new Date(order.date).toLocaleDateString()}</p>
+                                <p style="color: #64748b; margin: 0.25rem 0 0 0;">${order.items.length} items • ${order.items.reduce((sum, item) => sum + item.quantity, 0)} units</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">R${order.total}</div>
+                                <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;">
+                                    ${order.status}
+                                </span>
+                            </div>
+                        </div>
+                        <button onclick="reorder('${order.id}')" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                            Reorder
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            clearCart() {
+                if (this.cart.length === 0) {
+                    this.showNotification('Cart is already empty', 'info');
+                    return;
+                }
+
+                if (confirm('Are you sure you want to clear your cart?')) {
+                    this.cart = [];
+                    this.saveCart();
+                    this.renderCartItems();
+                    this.updateCartSummary();
+                    this.showNotification('Cart cleared', 'info');
+                }
+            }
+
+            proceedToCheckout() {
+                if (this.cart.length === 0) {
+                    this.showNotification('Your cart is empty', 'warning');
+                    return;
+                }
+
+                // Create order
+                const order = {
+                    id: 'ORD-' + Date.now(),
+                    items: [...this.cart],
+                    total: this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                };
+
+                // Save order
+                this.orders.push(order);
+                localStorage.setItem('buyer_orders', JSON.stringify(this.orders));
+
+                // Clear cart and show success
+                this.cart = [];
+                this.saveCart();
+                this.renderCartItems();
+                this.updateCartSummary();
+                
+                this.showNotification(`Order #${order.id} placed successfully! Total: R${order.total}`, 'success');
+                this.loadOrderHistory();
+            }
+
+            saveCart() {
+                localStorage.setItem('simple_cart', JSON.stringify(this.cart));
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                const bgColor = type === 'success' ? '#10b981' : type === 'warning' ? '#f59e0b' : type === 'error' ? '#ef4444' : '#6366f1';
+                
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${bgColor};
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 0.5rem;
+                    z-index: 1000;
+                    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                    max-width: 300px;
+                    animation: slideInRight 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutRight 0.3s ease-in';
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        // Global functions
+        function handleAISuggestion(action) {
+            switch(action) {
+                case 'contactSupplier':
+                    alert('🔄 Redirecting to supplier contact form...');
+                    break;
+                case 'browseRelated':
+                    window.location.href = 'export-products.html?category=wine';
+                    break;
+                case 'optimizeShipping':
+                    enhancedCart.showNotification('📦 Contacting logistics team for optimized shipping...', 'info');
+                    break;
+                case 'increaseQuantity':
+                    enhancedCart.showNotification('⚡ Check product pages for quantity-based pricing', 'info');
+                    break;
+            }
+        }
+
+        function quickAddToCart(productId) {
+            // This would need the product database - for now show message
+            enhancedCart.showNotification('🔄 Loading product details...', 'info');
+            setTimeout(() => {
+                window.location.href = 'export-products.html';
+            }, 1000);
+        }
+
+        function clearCart() {
+            enhancedCart.clearCart();
+        }
+
+        function continueShopping() {
+            window.location.href = 'export-products.html';
+        }
+
+        function proceedToCheckout() {
+            enhancedCart.proceedToCheckout();
+        }
+
+        function reorder(orderId) {
+            enhancedCart.showNotification('🔄 Preparing your reorder...', 'info');
+            // In a real app, this would reload the previous order into cart
+        }
+
+        // Initialize enhanced cart
+        document.addEventListener('DOMContentLoaded', function() {
+            window.enhancedCart = new EnhancedBuyerCart();
+        });
+    </script>
 </body>
 </html>
