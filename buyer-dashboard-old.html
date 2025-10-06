@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard - AfriTrade Global</title>
+    <link rel="stylesheet" href="modern-styles.css">
+    <style>
+        .buyer-dashboard {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .buyer-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .order-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="export-header">
+        <div class="container fade-in-up">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🌍 AfriTrade Global</h1>
+                    <span>Buyer Dashboard</span>
+                </div>
+<nav class="main-nav">
+    <a href="export-index.html" class="nav-link">🏠 Home</a>
+    <a href="export-products.html" class="nav-link">📦 Products</a>
+    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
+    <a href="buyer-dashboard.html" class="nav-link">🛒 For Buyers</a>
+</nav>
+                <div class="header-actions">
+                    <span id="cartCount">0</span> 🛒
+                    <button class="btn-primary shadow-glow" onclick="openCheckout()">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="buyer-dashboard">
+        <!-- Buyer Stats -->
+        <div class="buyer-stats">
+            <div class="stat-card fade-in-up">
+                <h3 id="totalOrders">0</h3>
+                <p>Total Orders</p>
+            </div>
+            <div class="stat-card fade-in-up">
+                <h3 id="pendingOrders">0</h3>
+                <p>Pending Orders</p>
+            </div>
+            <div class="stat-card fade-in-up">
+                <h3 id="totalSpent">R0</h3>
+                <p>Total Spent</p>
+            </div>
+            <div class="stat-card fade-in-up">
+                <h3 id="savedProducts">0</h3>
+                <p>Saved Products</p>
+            </div>
+        </div>
+
+        <!-- Shopping Cart -->
+        <div class="order-section">
+            <h3>🛒 Your Shopping Cart</h3>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div style="text-align: right; margin-top: 1rem;">
+                <h4>Total: <span id="cartTotal">R0.00</span></h4>
+                <button onclick="openCheckout()" class="btn-primary shadow-glow">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Order History -->
+        <div class="order-section">
+            <h3>📋 Order History</h3>
+            <div id="orderHistory">
+                <!-- Orders will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Quick Order -->
+        <div class="order-section">
+            <h3>⚡ Quick Order</h3>
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 1rem; align-items: end;">
+                <div>
+                    <label>Select Product</label>
+                    <select id="quickProductSelect">
+                        <option value="">Choose a product...</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Quantity</label>
+                    <input type="number" id="quickQuantity" value="1" min="1">
+                </div>
+                <div>
+                    <label>Unit Price</label>
+                    <div id="quickPrice">R0.00</div>
+                </div>
+                <div>
+                    <button onclick="addQuickToCart()" class="btn-primary shadow-glow">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="background: white; margin: 5% auto; padding: 2rem; border-radius: 10px; max-width: 600px;">
+            <h3>Checkout</h3>
+            <div id="checkoutSummary"></div>
+            <button onclick="processOrder()" class="btn-primary shadow-glow">Place Order</button>
+            <button onclick="closeCheckout()" class="btn-secondary">Cancel</button>
+        </div>
+    </div>
+
+    <script src="js/buyer-system.js"></script>
+    <script src="js/unified-navigation.js"></script>
+    <script src="js/simple-cart.js"></script>
+</body>
+</html>
