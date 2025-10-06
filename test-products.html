@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Products</title>
+</head>
+<body>
+    <h1>Testing Product Load</h1>
+    <div id="testOutput"></div>
+    
+    <script src="js/export-all-products.js"></script>
+    <script>
+        setTimeout(() => {
+            const output = document.getElementById('testOutput');
+            if (typeof exportProducts !== 'undefined') {
+                output.innerHTML = `✅ SUCCESS: Loaded ${exportProducts.length} products`;
+                console.log('Products:', exportProducts);
+            } else {
+                output.innerHTML = `❌ FAILED: exportProducts is undefined`;
+                console.error('exportProducts not found');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

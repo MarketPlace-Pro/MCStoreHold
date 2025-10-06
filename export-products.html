@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Export Products - AfriTrade Global</title>
     <link rel="stylesheet" href="modern-styles.css">
-    <link rel="stylesheet" href="css/expanding-menu.css">
     <style>
         /* Header styles */
         header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
@@ -19,8 +18,6 @@
         .main-nav a { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0; }
         .main-nav a:hover { color: #ffd700; }
         .header-actions { display: flex; align-items: center; gap: 1rem; }
-        .currency-display { background: rgba(255,255,255,0.15); color: white; padding: 0.4rem 0.8rem; border-radius: 5px; font-size: 0.75rem; }
-        .account-btn { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 0.8rem; border-radius: 5px; text-decoration: none; font-size: 0.8rem; }
 
         /* Category filters */
         .category-filters { background: #f8f9fa; padding: 1.5rem 0; }
@@ -31,12 +28,23 @@
         .filter-icon { font-size: 2rem; margin-bottom: 0.5rem; }
 
         /* Products grid */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
-        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid #e2e8f0; }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .product-card img { width: 100%; height: 180px; object-fit: cover; }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #e2e8f0; }
         .product-info { padding: 1.2rem; }
-        .price { font-size: 1.2rem; font-weight: bold; color: #2c5aa0; }
+        .price { font-size: 1.4rem; font-weight: bold; color: #2c5aa0; margin: 0.5rem 0; }
+        .moq-badge { background: #f59e0b; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 0.5rem; }
+        
+        /* Cart Animations */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -47,22 +55,17 @@
                     <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
                     <p>Africa to World Export Platform</p>
                 </div>
-                
-<nav class="main-nav">
-    <a href="export-index.html" class="nav-link">🏠 Home</a>
-    <a href="export-products.html" class="nav-link">📦 Products</a>
-    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
-    <a href="buyer-dashboard.html" class="nav-link">🛒 For Buyers</a>
-</nav>
-                
+
+                <nav class="main-nav">
+                    <a href="export-index.html" class="nav-link">🏠 Home</a>
+                    <a href="export-products-fixed.html" class="nav-link">📦 Products</a>
+                    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
+                    <a href="buyer-dashboard.html" class="nav-link">🛒 For Buyers</a>
+                </nav>
+
                 <div class="header-actions">
-                    <span id="cartCount" style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: none; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">0</span>
+                    <span id="cartCount" style="background: #6366f1; color: white; padding: 0.25rem 0.5rem; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: none; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">0</span>
                     <a href="buyer-dashboard.html" class="btn-primary">View Cart</a>
-                </div>
-                    <div class="user-actions">
-                        <a href="supplier-login.html" class="account-btn">🏭 Supplier</a>
-                        <a href="buyer-login.html" class="account-btn">🌍 Buyer</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -72,19 +75,34 @@
         <div class="container fade-in-up">
             <h2 style="text-align: center; margin-bottom: 1.2rem;">Browse African Export Products</h2>
             <div class="filter-grid">
-                <div class="filter-card active" onclick="filterProducts('all')">
+                <div class="filter-card active" data-category="all">
                     <div class="filter-icon">🌍</div>
                     <h3>All Products</h3>
                     <p>View all products</p>
                 </div>
-                <div class="filter-card" onclick="filterProducts('wine')">
+                <div class="filter-card" data-category="wine">
                     <div class="filter-icon">🍷</div>
                     <h3>Wine & Spirits</h3>
                     <p>10 Products</p>
                 </div>
-                <div class="filter-card" onclick="filterProducts('fruits')">
+                <div class="filter-card" data-category="fruits">
                     <div class="filter-icon">🍋</div>
                     <h3>Fruits & Agriculture</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="crafts">
+                    <div class="filter-icon">💎</div>
+                    <h3>Crafts & Minerals</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="textiles">
+                    <div class="filter-icon">🧥</div>
+                    <h3>Textiles & Fashion</h3>
+                    <p>10 Products</p>
+                </div>
+                <div class="filter-card" data-category="spices">
+                    <div class="filter-icon">🌶️</div>
+                    <h3>Spices & Foods</h3>
                     <p>10 Products</p>
                 </div>
             </div>
@@ -97,19 +115,203 @@
         </div>
 
         <div class="products-grid" id="productsGrid">
-            <!-- Products will be loaded here -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #64748b;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔄</div>
+                <h3>Loading Products...</h3>
+                <p>Please wait while we load our export products</p>
+            </div>
         </div>
     </main>
 
-    <footer>
-        <div class="container fade-in-up">
-            <p style="text-align: center; padding: 2rem 0; color: #666;">&copy; 2024 AfriTrade Global. Connecting Africa to the World.</p>
-        </div>
-    </footer>
     <script src="js/export-all-products.js"></script>
-    <script src="js/export-products-with-cart.js"></script>
-
-    <script src="js/unified-navigation.js"></script>
-    <script src="js/simple-cart.js"></script>
+    <script>
+        // Simple and reliable product loading
+        let currentCategory = 'all';
+        
+        function loadProducts(category = 'all') {
+            const grid = document.getElementById('productsGrid');
+            const title = document.getElementById('categoryTitle');
+            
+            // Show loading
+            grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">Loading products...</div>';
+            
+            // Check if products are loaded
+            if (typeof exportProducts === 'undefined') {
+                console.error('Product database not loaded');
+                grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #ef4444;">Error: Could not load products</div>';
+                return;
+            }
+            
+            console.log('Loaded products:', exportProducts.length);
+            
+            let filteredProducts = exportProducts;
+            if (category !== 'all') {
+                filteredProducts = exportProducts.filter(p => p.category === category);
+            }
+            
+            // Update title
+            const categoryTitles = {
+                'all': 'All Export Products',
+                'wine': '🍷 Wine & Spirits', 
+                'fruits': '🍋 Fruits & Agriculture',
+                'crafts': '💎 Crafts & Minerals',
+                'textiles': '🧥 Textiles & Fashion',
+                'spices': '🌶️ Spices & Foods'
+            };
+            title.textContent = categoryTitles[category] || 'Export Products';
+            
+            // Render products WITH ADD TO CART BUTTONS
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #64748b;">No products found in this category</div>';
+                return;
+            }
+            
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <div class="moq-badge">MOQ: ${product.minOrder} ${product.unit}s</div>
+                        <h3 style="margin: 0.5rem 0; color: #1e293b;">${product.name}</h3>
+                        <p style="color: #64748b; margin: 0.25rem 0;"><strong>Supplier:</strong> ${product.supplier}</p>
+                        <p style="color: #64748b; margin: 0.25rem 0;"><strong>Origin:</strong> ${product.origin}</p>
+                        
+                        <div style="display: flex; gap: 0.3rem; margin: 0.5rem 0; flex-wrap: wrap;">
+                            ${product.exportMarkets.map(market => 
+                                `<span style="background: #e0e7ff; color: #3730a3; padding: 0.2rem 0.5rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 600;">${market}</span>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="price">R${product.price}/${product.unit}</div>
+                        
+                        <!-- 🛒 ADD TO CART SECTION -->
+                        <div style="margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+                            <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                                <label style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Quantity:</label>
+                                <input type="number" 
+                                       id="quantity-${product.id}" 
+                                       value="${product.minOrder}" 
+                                       min="${product.minOrder}" 
+                                       style="width: 70px; padding: 0.4rem; border: 2px solid #e2e8f0; border-radius: 0.375rem; font-size: 0.8rem;"
+                                       onchange="validateQuantity('${product.id}', ${product.minOrder})">
+                                <span style="font-size: 0.8rem; color: #64748b;">${product.unit}s</span>
+                            </div>
+                            <button onclick="addToCart('${product.id}')" 
+                                    style="width: 100%; background: #6366f1; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                                🛒 Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function validateQuantity(productId, minOrder) {
+            const input = document.getElementById('quantity-' + productId);
+            const quantity = parseInt(input.value);
+            
+            if (quantity < minOrder) {
+                input.value = minOrder;
+                showNotification('Minimum order is ' + minOrder + ' units', 'warning');
+            }
+        }
+        
+        function addToCart(productId) {
+            const product = exportProducts.find(p => p.id === productId);
+            if (!product) {
+                showNotification('Product not found', 'error');
+                return;
+            }
+            
+            const quantityInput = document.getElementById('quantity-' + productId);
+            const quantity = parseInt(quantityInput.value) || product.minOrder;
+            
+            if (quantity < product.minOrder) {
+                showNotification('Minimum order quantity is ' + product.minOrder + ' ' + product.unit + 's', 'warning');
+                quantityInput.value = product.minOrder;
+                return;
+            }
+            
+            const cart = JSON.parse(localStorage.getItem('simple_cart')) || [];
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+                showNotification('Added ' + quantity + ' more ' + product.unit + 's of ' + product.name + ' (Total: ' + existingItem.quantity + ')', 'success');
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    unit: product.unit,
+                    minOrder: product.minOrder,
+                    supplier: product.supplier,
+                    image: product.image,
+                    quantity: quantity
+                });
+                showNotification('Added ' + quantity + ' ' + product.unit + 's of ' + product.name + ' to cart!', 'success');
+            }
+            
+            localStorage.setItem('simple_cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? '#10b981' : type === 'warning' ? '#f59e0b' : type === 'error' ? '#ef4444' : '#6366f1';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColor};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 0.5rem;
+                z-index: 1000;
+                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                max-width: 300px;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-in';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        function updateCartDisplay() {
+            const cart = JSON.parse(localStorage.getItem('simple_cart')) || [];
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = cart.length;
+                cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup filter clicks
+            document.querySelectorAll('.filter-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.getAttribute('data-category');
+                    loadProducts(currentCategory);
+                });
+            });
+            
+            // Load products
+            setTimeout(() => {
+                loadProducts();
+                updateCartDisplay();
+            }, 100);
+        });
+    </script>
 </body>
 </html>
