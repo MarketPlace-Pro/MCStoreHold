@@ -44,22 +44,253 @@
             <!-- Export Categories -->
             <section id="categoriesSection">
                 <h2 class="section-title">Export Categories</h2>
-                <!-- Categories will be loaded here by JavaScript -->
+                <div class="categories-grid">
+                    <div class="category-card active" data-category="all">
+                        <div class="category-icon">🌍</div>
+                        <h3>All Export Products</h3>
+                        <p>25 Products</p>
+                        <button class="btn-primary" onclick="filterProducts('all')">
+                            View All
+                        </button>
+                    </div>
+                    <div class="category-card" data-category="wine">
+                        <div class="category-icon">🍷</div>
+                        <h3>Wine & Spirits</h3>
+                        <p>5 Products</p>
+                        <button class="btn-primary" onclick="filterProducts('wine')">
+                            View Exports
+                        </button>
+                    </div>
+                    <div class="category-card" data-category="fruits">
+                        <div class="category-icon">🍓</div>
+                        <h3>Fresh Fruits</h3>
+                        <p>5 Products</p>
+                        <button class="btn-primary" onclick="filterProducts('fruits')">
+                            View Exports
+                        </button>
+                    </div>
+                    <div class="category-card" data-category="crafts">
+                        <div class="category-icon">🎨</div>
+                        <h3>Handicrafts</h3>
+                        <p>5 Products</p>
+                        <button class="btn-primary" onclick="filterProducts('crafts')">
+                            View Exports
+                        </button>
+                    </div>
+                    <div class="category-card" data-category="textiles">
+                        <div class="category-icon">👕</div>
+                        <h3>Textiles</h3>
+                        <p>5 Products</p>
+                        <button class="btn-primary" onclick="filterProducts('textiles')">
+                            View Exports
+                        </button>
+                    </div>
+                    <div class="category-card" data-category="spices">
+                        <div class="category-icon">🌶️</div>
+                        <h3>Spices & Foods</h3>
+                        <p>5 Products</p>
+                        <button class="btn-primary" onclick="filterProducts('spices')">
+                            View Exports
+                        </button>
+                    </div>
+                </div>
             </section>
 
             <!-- Export Products Grid -->
             <section id="productsSection">
                 <h2 class="section-title" id="productsTitle">All Export Products</h2>
                 <div class="products-export-grid" id="productsContainer">
-                    <!-- Products will be loaded here by JavaScript -->
+                    Loading export products...
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Load the original export products data -->
+    <!-- Load enhanced products data -->
     <script src="js/export-enhanced-data.js"></script>
-    <!-- Load our new export-only system -->
-    <script src="js/export-only-system.js"></script>
+    
+    <!-- Simple products loader -->
+    <script>
+        let currentCategory = 'all';
+        
+        function filterProducts(category) {
+            currentCategory = category;
+            
+            // Update active category
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            // Update products title
+            document.getElementById('productsTitle').textContent = 
+                category === 'all' ? 'All Export Products' : 
+                getCategoryName(category) + ' Exports';
+            
+            // Filter and display products
+            displayProducts();
+        }
+        
+        function displayProducts() {
+            const container = document.getElementById('productsContainer');
+            
+            if (!window.exportProducts || window.exportProducts.length === 0) {
+                container.innerHTML = '<div class="no-exports">No export products available.</div>';
+                return;
+            }
+            
+            let productsToShow = window.exportProducts;
+            if (currentCategory !== 'all') {
+                productsToShow = window.exportProducts.filter(p => p.category === currentCategory);
+            }
+            
+            if (productsToShow.length === 0) {
+                container.innerHTML = '<div class="no-exports">No products found in this category.</div>';
+                return;
+            }
+            
+            container.innerHTML = productsToShow.map(product => `
+                <div class="export-product-card" data-category="${product.category}">
+                    <div class="export-product-header">
+                        <img src="${product.image}" alt="${product.name}" 
+                             onerror="this.src='https://via.placeholder.com/400x300/1e3c72/FFFFFF?text=Export+Product'">
+                        <div class="export-badges">
+                            ${product.certification ? `<span class="cert-badge">${product.certification.length} Certifications</span>` : ''}
+                            <span class="origin-badge">${product.origin}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="export-product-body">
+                        <div class="product-category-tag">${getCategoryName(product.category)}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-supplier">By: ${product.supplier}</p>
+                        <p class="product-description">${product.description}</p>
+                        
+                        <div class="export-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">💰 Price:</span>
+                                <span class="spec-value">$${product.price}/${product.unit}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">📦 Min Order:</span>
+                                <span class="spec-value">${product.minOrder} ${product.moqUnit || product.unit + 's'}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">🌍 Markets:</span>
+                                <span class="spec-value">${product.exportMarkets?.join(', ') || 'Global'}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">🚢 Shipping:</span>
+                                <span class="spec-value">${product.shipping}</span>
+                            </div>
+                        </div>
+
+                        <div class="export-actions">
+                            <button class="btn-export-primary" onclick="viewProductDetails('${product.id}')">
+                                📋 Export Details
+                            </button>
+                            <button class="btn-export-secondary" onclick="contactExporter('${product.id}')">
+                                📞 Contact Exporter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function getCategoryName(category) {
+            const names = {
+                'wine': '🍷 Wine & Spirits',
+                'fruits': '🍓 Fresh Fruits', 
+                'crafts': '🎨 Handicrafts',
+                'textiles': '👕 Textiles',
+                'spices': '🌶️ Spices'
+            };
+            return names[category] || category;
+        }
+        
+        function viewProductDetails(productId) {
+            window.location.href = `export-product-details.html?id=${productId}`;
+        }
+        
+        function contactExporter(productId) {
+            const product = window.exportProducts.find(p => p.id === productId);
+            if (product) {
+                alert(`Contact Exporter for: ${product.name}\n\nSupplier: ${product.supplier}\nOrigin: ${product.origin}\n\nThis would open a contact form.`);
+            }
+        }
+        
+        // Search functionality
+        document.getElementById('exportSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const allProducts = window.exportProducts || [];
+            
+            let filteredProducts = allProducts;
+            if (query.trim()) {
+                filteredProducts = allProducts.filter(product => 
+                    product.name.toLowerCase().includes(query) ||
+                    product.supplier.toLowerCase().includes(query) ||
+                    product.description.toLowerCase().includes(query) ||
+                    product.origin.toLowerCase().includes(query)
+                );
+            }
+            
+            // Apply category filter to search results
+            if (currentCategory !== 'all') {
+                filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
+            }
+            
+            const container = document.getElementById('productsContainer');
+            if (filteredProducts.length === 0) {
+                container.innerHTML = '<div class="no-exports">No products found matching your search.</div>';
+            } else {
+                container.innerHTML = filteredProducts.map(product => `
+                    <div class="export-product-card" data-category="${product.category}">
+                        <div class="export-product-header">
+                            <img src="${product.image}" alt="${product.name}" 
+                                 onerror="this.src='https://via.placeholder.com/400x300/1e3c72/FFFFFF?text=Export+Product'">
+                            <div class="export-badges">
+                                ${product.certification ? `<span class="cert-badge">${product.certification.length} Certifications</span>` : ''}
+                                <span class="origin-badge">${product.origin}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="export-product-body">
+                            <div class="product-category-tag">${getCategoryName(product.category)}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-supplier">By: ${product.supplier}</p>
+                            <p class="product-description">${product.description}</p>
+                            
+                            <div class="export-specs">
+                                <div class="spec-item">
+                                    <span class="spec-label">💰 Price:</span>
+                                    <span class="spec-value">$${product.price}/${product.unit}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">📦 Min Order:</span>
+                                    <span class="spec-value">${product.minOrder} ${product.moqUnit || product.unit + 's'}</span>
+                                </div>
+                            </div>
+
+                            <div class="export-actions">
+                                <button class="btn-export-primary" onclick="viewProductDetails('${product.id}')">
+                                    📋 Export Details
+                                </button>
+                                <button class="btn-export-secondary" onclick="contactExporter('${product.id}')">
+                                    📞 Contact Exporter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        });
+        
+        // Load products when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Products page loaded with', (window.exportProducts || []).length, 'products');
+            displayProducts();
+        });
+    </script>
 </body>
 </html>
