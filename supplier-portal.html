@@ -3,201 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supplier Portal - AfriTrade Global</title>
+    <title>For Exporters - AfriTrade Global</title>
     <link rel="stylesheet" href="modern-styles.css">
     <style>
-        .supplier-dashboard {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .supplier-hero {
+            background: linear-gradient(135deg, #0f4c75 0%, #1b6ca8 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
         }
-        .supplier-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .supplier-actions {
+        
+        .supplier-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .supplier-feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .supplier-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .registration-steps {
+            background: #f8fafc;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        .supplier-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .product-list {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-top: 2rem;
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body>
-    <header class="export-header">
+    <header>
         <div class="container fade-in-up">
             <div class="header-content">
                 <div class="logo">
-                    <h1>🌍 AfriTrade Global</h1>
-                    <span>Supplier Portal</span>
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
                 </div>
-<nav class="main-nav">
-    <a href="export-index.html" class="nav-link">🏠 Home</a>
-    <a href="export-products.html" class="nav-link">📦 Products</a>
-    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
-    <a href="buyer-dashboard-enhanced.html" class="nav-link">🛒 For Buyers</a>
-</nav>
+                <nav class="main-nav">
+                    <a href="export-index.html" class="nav-link">Home</a>
+                    <a href="export-products.html" class="nav-link">Export Products</a>
+                    <a href="supplier-portal.html" class="nav-link active">For Exporters</a>
+                    <a href="buyer-dashboard.html" class="nav-link">For Importers</a>
+                </nav>
                 <div class="header-actions">
-                    <button class="btn-secondary shadow-glow" onclick="openSupplierLogin()">Supplier Login</button>
-                    <button class="btn-primary" onclick="openRegistration()">Join as Supplier</button>
+                    <a href="admin-access.html" class="btn-outline">Exporter Login</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="supplier-dashboard">
-        <!-- Supplier Stats -->
-        <div class="supplier-stats">
-            <div class="stat-card fade-in-up">
-                <h3 id="supplierProductCount">0</h3>
-                <p>Your Products</p>
+    <main>
+        <section class="supplier-hero">
+            <div class="container">
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Grow Your Export Business</h1>
+                <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem;">
+                    Reach global buyers and expand your market with Africa's premier export platform
+                </p>
+                <button class="btn-primary large" onclick="location.href='supplier-registration.html'">
+                    🏭 Start Exporting Today
+                </button>
             </div>
-            <div class="stat-card fade-in-up">
-                <h3 id="supplierOrdersCount">0</h3>
-                <p>Total Orders</p>
-            </div>
-            <div class="stat-card fade-in-up">
-                <h3 id="supplierRevenue">R0</h3>
-                <p>Total Revenue</p>
-            </div>
-            <div class="stat-card fade-in-up">
-                <h3 id="supplierRating">0.0</h3>
-                <p>Supplier Rating</p>
-            </div>
-        </div>
+        </section>
 
-        <!-- Quick Actions -->
-        <div class="supplier-actions">
-            <div class="action-card fade-in-up">
-                <h3>📦 Product Management</h3>
-                <button onclick="openAddProductForm()" class="btn-primary">Add New Product</button>
-                <button onclick="viewMyProducts()" class="btn-secondary shadow-glow">View My Products</button>
-                <button onclick="updateInventory()" class="btn-secondary shadow-glow">Update Inventory</button>
-            </div>
-
-            <div class="action-card fade-in-up">
-                <h3>📊 Business Analytics</h3>
-                <button onclick="viewSalesReport()" class="btn-primary">Sales Report</button>
-                <button onclick="viewOrderHistory()" class="btn-secondary shadow-glow">Order History</button>
-                <button onclick="analyzePerformance()" class="btn-secondary shadow-glow">Performance Analytics</button>
-            </div>
-
-            <div class="action-card fade-in-up">
-                <h3>📋 Order Management</h3>
-                <button onclick="viewPendingOrders()" class="btn-primary">Pending Orders</button>
-                <button onclick="viewCompletedOrders()" class="btn-secondary shadow-glow">Completed Orders</button>
-                <button onclick="manageShipping()" class="btn-secondary shadow-glow">Shipping Management</button>
+        <div class="container">
+            <div class="supplier-features">
+                <div class="supplier-feature">
+                    <div class="supplier-feature-icon">🌍</div>
+                    <h3>Global Reach</h3>
+                    <p>Access buyers from 50+ countries across the world</p>
+                </div>
+                <div class="supplier-feature">
+                    <div class="supplier-feature-icon">📊</div>
+                    <h3>Export Analytics</h3>
+                    <p>Track your sales and market performance in real-time</p>
+                </div>
+                <div class="supplier-feature">
+                    <div class="supplier-feature-icon">🚢</div>
+                    <h3>Logistics Support</h3>
+                    <p>End-to-end shipping and customs clearance assistance</p>
+                </div>
+                <div class="supplier-feature">
+                    <div class="supplier-feature-icon">💳</div>
+                    <h3>Secure Payments</h3>
+                    <p>Guaranteed payments with escrow protection</p>
+                </div>
             </div>
 
-            <div class="action-card fade-in-up">
-                <h3>⚙️ Account Settings</h3>
-                <button onclick="editSupplierProfile()" class="btn-primary">Edit Profile</button>
-                <button onclick="manageDocuments()" class="btn-secondary shadow-glow">Manage Documents</button>
-                <button onclick="viewCommissions()" class="btn-secondary shadow-glow">Commission Report</button>
-            </div>
-        </div>
-
-        <!-- Add Product Form -->
-        <div class="supplier-form" id="addProductForm" style="display: none;">
-            <h3>Add New Product</h3>
-            <form id="newProductForm" onsubmit="submitNewProduct(event)">
-                <div class="form-grid">
+            <div class="registration-steps">
+                <h2 style="text-align: center; margin-bottom: 3rem;">Become a Verified Exporter in 3 Steps</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
                     <div>
-                        <label>Product Name *</label>
-                        <input type="text" id="productName" required>
-                    </div>
-                    <div>
-                        <label>Category *</label>
-                        <select id="productCategory" required>
-                            <option value="">Select Category</option>
-                            <option value="wine">🍷 Wine & Spirits</option>
-                            <option value="fruits">🍋 Fruits & Agriculture</option>
-                            <option value="crafts">💎 Crafts & Minerals</option>
-                            <option value="textiles">🧥 Textiles & Fashion</option>
-                            <option value="spices">🌶️ Spices & Foods</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Price (R) *</label>
-                        <input type="number" id="productPrice" step="0.01" required>
-                    </div>
-                    <div>
-                        <label>Minimum Order Quantity *</label>
-                        <input type="number" id="productMOQ" required>
-                    </div>
-                    <div>
-                        <label>Unit *</label>
-                        <select id="productUnit" required>
-                            <option value="bottle">Bottle</option>
-                            <option value="kilogram">Kilogram</option>
-                            <option value="piece">Piece</option>
-                            <option value="meter">Meter</option>
-                            <option value="liter">Liter</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Origin *</label>
-                        <input type="text" id="productOrigin" required>
+                        <h3>Register Your Business</h3>
+                        <p>Complete our exporter registration form with your business details and export capabilities.</p>
                     </div>
                 </div>
-                <div>
-                    <label>Description *</label>
-                    <textarea id="productDescription" rows="4" required></textarea>
-                </div>
-                <div class="form-grid">
+                
+                <div class="step">
+                    <div class="step-number">2</div>
                     <div>
-                        <label>Export Markets</label>
-                        <div>
-                            <input type="checkbox" id="marketEU" value="EU"> <label for="marketEU">EU</label>
-                            <input type="checkbox" id="marketUSA" value="USA"> <label for="marketUSA">USA</label>
-                            <input type="checkbox" id="marketChina" value="China"> <label for="marketChina">China</label>
-                            <input type="checkbox" id="marketMiddleEast" value="Middle East"> <label for="marketMiddleEast">Middle East</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label>Certifications</label>
-                        <div>
-                            <input type="checkbox" id="certOrganic" value="Organic"> <label for="certOrganic">Organic</label>
-                            <input type="checkbox" id="certFairTrade" value="Fair Trade"> <label for="certFairTrade">Fair Trade</label>
-                            <input type="checkbox" id="certGlobalGAP" value="GlobalGAP"> <label for="certGlobalGAP">GlobalGAP</label>
-                        </div>
+                        <h3>Get Verified</h3>
+                        <p>Our team verifies your export credentials and quality standards.</p>
                     </div>
                 </div>
-                <div style="margin-top: 1rem;">
-                    <button type="submit" class="btn-primary">Add Product</button>
-                    <button type="button" class="btn-secondary shadow-glow" onclick="closeAddProductForm()">Cancel</button>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Start Exporting</h3>
+                        <p>List your products and connect with global buyers immediately.</p>
+                    </div>
                 </div>
-            </form>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn-primary large" onclick="location.href='supplier-registration.html'">
+                        🚀 Begin Registration
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <!-- My Products List -->
-        <div class="product-list" id="myProductsSection" style="display: none;">
-            <h3>My Products</h3>
-            <div id="myProductsList"></div>
-        </div>
-    </div>
-
-    <script src="js/supplier-system.js"></script>
-    <script src="js/unified-navigation.js"></script>
+    </main>
 </body>
 </html>

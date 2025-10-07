@@ -255,9 +255,14 @@
                         <button class="btn-contact-export" onclick="contactExporter()">
                             📞 Contact Exporter Directly
                         </button>
+                    <div class="action-buttons">
+                        <button class="btn-contact-export" onclick="addToCartFromDetails()">
+                            🛒 Add to Export Cart
+                        </button>
                         <button class="btn-inquiry" onclick="sendInquiry()">
                             📧 Send Detailed Inquiry
                         </button>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -409,3 +414,29 @@
     </script>
 </body>
 </html>
+
+        function addToCartFromDetails() {
+            const product = exportProducts.find(p => p.id === productId);
+            if (product) {
+                const cart = JSON.parse(localStorage.getItem('export_cart')) || [];
+                const existingItem = cart.find(item => item.id === productId);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        unit: product.unit,
+                        minOrder: product.minOrder,
+                        supplier: product.supplier,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+
+                localStorage.setItem('export_cart', JSON.stringify(cart));
+                alert(`✅ ${product.name} added to your export cart!`);
+            }
+        }

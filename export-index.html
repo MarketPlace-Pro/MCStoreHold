@@ -3,158 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfriTrade Global - B2B Export Marketplace</title>
+    <title>AfriTrade Global - Africa to World Export Platform</title>
     <link rel="stylesheet" href="modern-styles.css">
+    <style>
+        .export-hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffd700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero-primary {
+            background: #ffd700;
+            color: #1e3c72;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hero-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .categories-showcase {
+            margin: 4rem 0;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .category-showcase {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-showcase:hover {
+            transform: translateY(-5px);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-hero-primary, .btn-hero-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Professional Header -->
-    <header class="export-header">
+    <header>
         <div class="container fade-in-up">
             <div class="header-content">
                 <div class="logo">
-                    <h1>🌍 AfriTrade Global</h1>
-                    <span>B2B Export Marketplace</span>
+                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
+                    <p>Africa to World Export Platform</p>
                 </div>
-<nav class="main-nav">
-    <a href="export-index.html" class="nav-link">🏠 Home</a>
-    <a href="export-products.html" class="nav-link">📦 Products</a>
-    <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
-    <a href="buyer-dashboard-enhanced.html" class="nav-link">🛒 For Buyers</a>
-</nav>
+                <nav class="main-nav">
+                    <a href="export-index.html" class="nav-link active">Home</a>
+                    <a href="export-products.html" class="nav-link">Export Products</a>
+                    <a href="supplier-portal.html" class="nav-link">For Exporters</a>
+                    <a href="buyer-dashboard.html" class="nav-link">For Importers</a>
+                </nav>
                 <div class="header-actions">
-                    <span id="cartCount" style="display: none;">0</span>
-                    <button class="btn-secondary" onclick="location.href='supplier-portal.html'">Supplier Login</button>
-                    <button class="btn-primary" onclick="location.href='buyer-dashboard-enhanced.html'">Buyer Access</button>
+                    <a href="buyer-dashboard.html" class="btn-outline" id="cartButton">
+                        🛒 Cart <span id="cartCount" style="display: none;">0</span>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container fade-in-up">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>African Excellence, Global Reach</h1>
+    <main>
+        <!-- Hero Section -->
+        <section class="export-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">🌍 Africa's Premier Export Marketplace</div>
+                    <h1 class="hero-title">Connect Global Buyers with African Exporters</h1>
                     <p class="hero-subtitle">
-                        Connect directly with verified South African suppliers. Premium wines, fresh fruits, 
-                        authentic crafts, and more - ready for international markets.
+                        Source premium African products directly from verified exporters. 
+                        Wine, fruits, handicrafts, textiles, and spices - all with export-ready quality.
                     </p>
+                    
                     <div class="hero-stats">
-                        <div class="stat">
+                        <div class="stat-item">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Verified Exporters</span>
+                        </div>
+                        <div class="stat-item">
                             <span class="stat-number">50+</span>
-                            <span class="stat-label">Premium Products</span>
+                            <span class="stat-label">Countries Served</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">25</span>
-                            <span class="stat-label">Verified Suppliers</span>
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Product Categories</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">15</span>
-                            <span class="stat-label">Export Markets</span>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Export Support</span>
                         </div>
                     </div>
-                    <div class="hero-actions">
-                        <a href="export-products.html" class="btn-primary large">Browse Products</a>
-                        <a href="#how-it-works" class="btn-secondary large">How It Works</a>
+                    
+                    <div class="cta-buttons">
+                        <button class="btn-hero-primary" onclick="location.href='export-products.html'">
+                            🛍️ Browse Export Products
+                        </button>
+                        <button class="btn-hero-secondary" onclick="location.href='supplier-portal.html'">
+                            🏭 Become an Exporter
+                        </button>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <img src="https://images.unsplash.com/photo-1563013546-73edefabf54c?w=600&h=400&fit=crop" alt="African Export Products" style="border-radius: 10px; width: 100%;">
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="features-section">
-        <div class="container fade-in-up">
-            <h2>Simple B2B Export Process</h2>
-            <p class="section-subtitle">From discovery to delivery - streamlined for international trade</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>1. Discover Products</h3>
-                    <p>Browse 50+ verified South African products across 5 categories with complete export specifications.</p>
-                    <a href="export-products.html" class="feature-link">Explore Products →</a>
+        <div class="container">
+            <!-- Features Section -->
+            <section>
+                <h2 class="section-title">Why Choose AfriTrade Global?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Verified Exporters</h3>
+                        <p>All suppliers are verified for export compliance and quality standards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚢</div>
+                        <h3 class="feature-title">Export Logistics</h3>
+                        <p>End-to-end shipping and customs clearance support.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Quality Assurance</h3>
+                        <p>Rigorous quality checks and certification verification.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💳</div>
+                        <h3 class="feature-title">Secure Payments</h3>
+                        <p>Protected transactions with escrow services available.</p>
+                    </div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🛒</div>
-                    <h3>2. B2B Ordering</h3>
-                    <p>Add to cart, meet MOQ requirements, and place orders with export documentation included.</p>
-                    <a href="buyer-dashboard-enhanced.html" class="feature-link">Start Ordering →</a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h3>3. Export Logistics</h3>
-                    <p>We handle shipping, customs, and documentation for smooth international delivery.</p>
-                    <a href="#logistics" class="feature-link">Learn More →</a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3>4. Grow Together</h3>
-                    <p>Build long-term relationships with African producers through our managed platform.</p>
-                    <a href="supplier-portal.html" class="feature-link">Join as Supplier →</a>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Platform Features -->
-    <section class="categories-section">
-        <div class="container fade-in-up">
-            <h2>Complete Export Platform</h2>
-            <p class="section-subtitle">Everything you need for successful international trade</p>
-            
-            <div class="categories-grid">
-                <a href="export-products.html" class="category-card">
-                    <div class="category-icon">📦</div>
-                    <h3>Product Catalog</h3>
-                    <p>50+ real products with MOQ, pricing, certifications, and export-ready specifications</p>
-                    <span class="product-count">Browse All Products</span>
-                </a>
-                
-                <a href="supplier-portal.html" class="category-card">
-                    <div class="category-icon">🏭</div>
-                    <h3>Supplier Portal</h3>
-                    <p>Complete supplier management system with product upload and order tracking</p>
-                    <span class="product-count">Join Our Network</span>
-                </a>
-                
-                <a href="buyer-dashboard-enhanced.html" class="category-card">
-                    <div class="category-icon">🛒</div>
-                    <h3>Buyer Dashboard</h3>
-                    <p>B2B shopping cart, order management, and export documentation system</p>
-                    <span class="product-count">Start Ordering</span>
-                </a>
-                
-                    <div class="category-icon">🤖</div>
-                    <p>Automated price optimization, market analysis, and business intelligence</p>
-                    <span class="product-count">See AI in Action</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container fade-in-up">
-            <div class="cta-content">
-                <h2>Ready to Start Exporting?</h2>
-                <p>Join African producers and international buyers in our managed B2B marketplace.</p>
-                <div class="cta-actions">
-                    <a href="buyer-dashboard-enhanced.html" class="btn-primary large">Start Buying</a>
-                    <a href="supplier-portal.html" class="btn-secondary large">Become a Supplier</a>
+            <!-- Categories Showcase -->
+            <section class="categories-showcase">
+                <h2 class="section-title">Explore Export Categories</h2>
+                <div class="categories-grid">
+                    <a href="export-products.html?category=wine" class="category-showcase">
+                        <div class="category-icon">🍷</div>
+                        <h3>Wine & Spirits</h3>
+                        <p>Premium African wines and spirits</p>
+                    </a>
+                    <a href="export-products.html?category=fruits" class="category-showcase">
+                        <div class="category-icon">🍓</div>
+                        <h3>Fresh Fruits</h3>
+                        <p>Quality fruits for global markets</p>
+                    </a>
+                    <a href="export-products.html?category=crafts" class="category-showcase">
+                        <div class="category-icon">🎨</div>
+                        <h3>Handicrafts</h3>
+                        <p>Traditional African artistry</p>
+                    </a>
+                    <a href="export-products.html?category=textiles" class="category-showcase">
+                        <div class="category-icon">👕</div>
+                        <h3>Textiles</h3>
+                        <p>Authentic African fabrics</p>
+                    </a>
+                    <a href="export-products.html?category=spices" class="category-showcase">
+                        <div class="category-icon">🌶️</div>
+                        <h3>Spices & Foods</h3>
+                        <p>Exotic flavors and ingredients</p>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <script src="js/unified-navigation.js"></script>
-    <script src="js/unified-navigation.js"></script>
+            <!-- CTA Section -->
+            <section style="text-align: center; margin: 4rem 0;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Ready to Start Exporting?</h2>
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 2rem;">
+                    Join hundreds of successful importers and exporters on our platform.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn-primary large" onclick="location.href='export-products.html'">
+                        🛒 Start Shopping for Exports
+                    </button>
+                    <button class="btn-outline large" onclick="location.href='supplier-portal.html'">
+                        🏭 Register as Exporter
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Cart functionality
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('export_cart')) || [];
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = cart.length;
+                cartCount.style.display = cart.length > 0 ? 'inline' : 'none';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+    </script>
 </body>
 </html>
