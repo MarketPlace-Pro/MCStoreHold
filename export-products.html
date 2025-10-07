@@ -3,294 +3,641 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Export Products - AfriTrade Global Export Platform</title>
+    <title>Export Products - AfriTrade Global</title>
     <link rel="stylesheet" href="modern-styles.css">
+    <style>
+        /* Mobile-first responsive styles */
+        .mobile-container {
+            max-width: 100%;
+            padding: 0 15px;
+        }
+        
+        .mobile-hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        
+        .mobile-hero h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-search {
+            max-width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .mobile-search input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .mobile-categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 1rem 0;
+            margin: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .mobile-categories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .mobile-category-btn {
+            flex-shrink: 0;
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .mobile-products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .mobile-product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .mobile-product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .mobile-product-content {
+            padding: 1.2rem;
+        }
+        
+        .mobile-product-category {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        
+        .mobile-product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        
+        .mobile-product-supplier {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .mobile-product-origin {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .mobile-product-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .mobile-product-specs {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 0.85rem;
+        }
+        
+        .mobile-spec-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .mobile-spec-value {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .mobile-product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .mobile-btn-primary, .mobile-btn-secondary {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .mobile-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .mobile-btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .mobile-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+        
+        .mobile-error {
+            text-align: center;
+            padding: 2rem;
+            color: var(--error);
+            background: #fed7d7;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        /* Tablet styles */
+        @media (min-width: 768px) {
+            .mobile-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mobile-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            .mobile-products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .mobile-container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container fade-in-up">
-            <div class="header-content">
-                <div class="logo">
-                    <h1><a href="export-index.html">🌍 AfriTrade Global</a></h1>
-                    <p>Africa to World Export Platform</p>
+    <!-- Simple Header -->
+    <header style="background: #1e3c72; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000;">
+        <div class="mobile-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1 style="margin: 0; font-size: 1.2rem;">🌍 AfriTrade Global</h1>
+                    <p style="margin: 0; font-size: 0.7rem; opacity: 0.8;">Export Platform</p>
                 </div>
-                <nav class="main-nav">
-                    <a href="export-index.html" class="nav-link">Home</a>
-                    <a href="export-products.html" class="nav-link active">Export Products</a>
-                    <a href="supplier-portal.html" class="nav-link">For Exporters</a>
-                    <a href="buyer-dashboard.html" class="nav-link">For Importers</a>
+                <nav style="display: flex; gap: 15px;">
+                    <a href="export-index.html" style="color: white; text-decoration: none; font-size: 0.9rem;">Home</a>
+                    <a href="export-products.html" style="color: #ffd700; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Products</a>
+                    <a href="supplier-portal.html" style="color: white; text-decoration: none; font-size: 0.9rem;">Exporters</a>
                 </nav>
-                <div class="header-actions">
-                    <a href="admin-access.html" class="btn-outline">Export Tools</a>
-                </div>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- Export Hero Section -->
-        <section class="export-hero">
-            <div class="container">
+        <!-- Hero Section -->
+        <section class="mobile-hero">
+            <div class="mobile-container">
                 <h1>African Export Products</h1>
-                <p>Discover premium African products ready for international markets. Direct from exporters to global buyers.</p>
+                <p style="opacity: 0.9; margin-bottom: 1.5rem;">Premium products ready for global markets</p>
                 
-                <div class="export-search">
-                    <input type="text" id="exportSearch" placeholder="🔍 Search export products, suppliers, origins...">
+                <div class="mobile-search">
+                    <input type="text" id="mobileSearch" placeholder="🔍 Search products, suppliers...">
                 </div>
             </div>
         </section>
 
-        <div class="container">
-            <!-- Export Categories -->
-            <section id="categoriesSection">
-                <h2 class="section-title">Export Categories</h2>
-                <div class="categories-grid">
-                    <div class="category-card active" data-category="all">
-                        <div class="category-icon">🌍</div>
-                        <h3>All Export Products</h3>
-                        <p>25 Products</p>
-                        <button class="btn-primary" onclick="filterProducts('all')">
-                            View All
-                        </button>
-                    </div>
-                    <div class="category-card" data-category="wine">
-                        <div class="category-icon">🍷</div>
-                        <h3>Wine & Spirits</h3>
-                        <p>5 Products</p>
-                        <button class="btn-primary" onclick="filterProducts('wine')">
-                            View Exports
-                        </button>
-                    </div>
-                    <div class="category-card" data-category="fruits">
-                        <div class="category-icon">🍓</div>
-                        <h3>Fresh Fruits</h3>
-                        <p>5 Products</p>
-                        <button class="btn-primary" onclick="filterProducts('fruits')">
-                            View Exports
-                        </button>
-                    </div>
-                    <div class="category-card" data-category="crafts">
-                        <div class="category-icon">🎨</div>
-                        <h3>Handicrafts</h3>
-                        <p>5 Products</p>
-                        <button class="btn-primary" onclick="filterProducts('crafts')">
-                            View Exports
-                        </button>
-                    </div>
-                    <div class="category-card" data-category="textiles">
-                        <div class="category-icon">👕</div>
-                        <h3>Textiles</h3>
-                        <p>5 Products</p>
-                        <button class="btn-primary" onclick="filterProducts('textiles')">
-                            View Exports
-                        </button>
-                    </div>
-                    <div class="category-card" data-category="spices">
-                        <div class="category-icon">🌶️</div>
-                        <h3>Spices & Foods</h3>
-                        <p>5 Products</p>
-                        <button class="btn-primary" onclick="filterProducts('spices')">
-                            View Exports
-                        </button>
-                    </div>
+        <div class="mobile-container">
+            <!-- Categories -->
+            <section>
+                <h2 style="margin-bottom: 1rem; font-size: 1.3rem;">Categories</h2>
+                <div class="mobile-categories" id="mobileCategories">
+                    <!-- Categories will be loaded here -->
                 </div>
             </section>
 
-            <!-- Export Products Grid -->
-            <section id="productsSection">
-                <h2 class="section-title" id="productsTitle">All Export Products</h2>
-                <div class="products-export-grid" id="productsContainer">
-                    Loading export products...
+            <!-- Products -->
+            <section>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0;">
+                    <h2 style="margin: 0; font-size: 1.3rem;" id="productsTitle">All Products</h2>
+                    <span style="color: var(--gray); font-size: 0.9rem;" id="productsCount"></span>
+                </div>
+                
+                <div class="mobile-products-grid" id="mobileProducts">
+                    <div class="mobile-loading">
+                        <div>🔄 Loading export products...</div>
+                    </div>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Load enhanced products data -->
-    <script src="js/export-enhanced-data.js"></script>
-    
-    <!-- Simple products loader -->
     <script>
+        // Enhanced export products data
+        const mobileProducts = [
+            // 🍷 WINE & SPIRITS
+            {
+                id: 'exp-wine-001',
+                name: 'Stellenbosch Cabernet Sauvignon',
+                category: 'wine',
+                supplier: 'Stellenbosch Vineyards',
+                origin: 'South Africa',
+                price: 24.50,
+                unit: 'bottle',
+                minOrder: 120,
+                moqUnit: 'cases',
+                description: 'Premium red wine with rich dark berry flavors and subtle oak notes.',
+                image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'China', 'USA'],
+                shipping: 'Refrigerated Container'
+            },
+            {
+                id: 'exp-wine-002',
+                name: 'Chenin Blanc Reserve',
+                category: 'wine',
+                supplier: 'Fairview Wines',
+                origin: 'South Africa',
+                price: 18.75,
+                unit: 'bottle',
+                minOrder: 100,
+                description: 'Crisp white wine with tropical fruit notes and refreshing acidity.',
+                image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop',
+                exportMarkets: ['USA', 'Canada'],
+                shipping: 'Temperature-controlled'
+            },
+            {
+                id: 'exp-wine-003',
+                name: 'Pinotage Premium',
+                category: 'wine',
+                supplier: 'Kanonkop Estate',
+                origin: 'South Africa',
+                price: 32.00,
+                unit: 'bottle',
+                minOrder: 80,
+                description: 'Unique South African varietal with smoky, earthy notes.',
+                image: 'https://images.unsplash.com/photo-1474722883778-792e799030e3?w=400&h=300&fit=crop',
+                exportMarkets: ['UK', 'Japan'],
+                shipping: 'Dry Container'
+            },
+            {
+                id: 'exp-wine-004',
+                name: 'Sauvignon Blanc Coastal',
+                category: 'wine',
+                supplier: 'Nederburg Wines',
+                origin: 'South Africa',
+                price: 16.50,
+                unit: 'bottle',
+                minOrder: 150,
+                description: 'Zesty white wine with green pepper and gooseberry aromas.',
+                image: 'https://images.unsplash.com/photo-1553361371-9b22f78e272b?w=400&h=300&fit=crop',
+                exportMarkets: ['China', 'USA'],
+                shipping: 'Reefer Container'
+            },
+            {
+                id: 'exp-wine-005',
+                name: 'Cap Classique Brut',
+                category: 'wine',
+                supplier: 'Graham Beck Wines',
+                origin: 'South Africa',
+                price: 28.00,
+                unit: 'bottle',
+                minOrder: 60,
+                description: 'Traditional method sparkling wine with fine bubbles.',
+                image: 'https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'UAE'],
+                shipping: 'Air Freight'
+            },
+
+            // 🍓 FRESH FRUITS
+            {
+                id: 'exp-fruit-001',
+                name: 'Hass Avocados Premium',
+                category: 'fruits',
+                supplier: 'Kenya Avocado Exporters',
+                origin: 'Kenya',
+                price: 3.20,
+                unit: 'kg',
+                minOrder: 1000,
+                description: 'Premium Hass avocados with creamy texture and rich flavor.',
+                image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'Middle East'],
+                shipping: 'Refrigerated'
+            },
+            {
+                id: 'exp-fruit-002',
+                name: 'Mangoes Kent Variety',
+                category: 'fruits',
+                supplier: 'Mali Mango Producers',
+                origin: 'Mali',
+                price: 2.80,
+                unit: 'kg',
+                minOrder: 2000,
+                description: 'Sweet and juicy Kent mangoes with minimal fiber.',
+                image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'UK'],
+                shipping: 'Air Freight'
+            },
+            {
+                id: 'exp-fruit-003',
+                name: 'Pineapples Sweet Extra',
+                category: 'fruits',
+                supplier: 'Ghana Fruit Exporters',
+                origin: 'Ghana',
+                price: 1.90,
+                unit: 'piece',
+                minOrder: 5000,
+                description: 'Extra sweet pineapples with golden flesh.',
+                image: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'Middle East'],
+                shipping: 'Refrigerated'
+            },
+            {
+                id: 'exp-fruit-004',
+                name: 'Citrus Oranges Valencia',
+                category: 'fruits',
+                supplier: 'Morocco Citrus Growers',
+                origin: 'Morocco',
+                price: 1.45,
+                unit: 'kg',
+                minOrder: 5000,
+                description: 'Juicy Valencia oranges with perfect balance.',
+                image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'Russia'],
+                shipping: 'Sea Container'
+            },
+            {
+                id: 'exp-fruit-005',
+                name: 'Table Grapes Seedless',
+                category: 'fruits',
+                supplier: 'Egyptian Vineyards',
+                origin: 'Egypt',
+                price: 4.50,
+                unit: 'kg',
+                minOrder: 2000,
+                description: 'Premium seedless table grapes, crisp and sweet.',
+                image: 'https://images.unsplash.com/photo-1574357671550-43ffb7e7c42a?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'UK'],
+                shipping: 'Cold Chain'
+            },
+
+            // 🎨 HANDICRAFTS (3 more to reach 25 total)
+            {
+                id: 'exp-craft-001',
+                name: 'Zulu Beaded Artwork',
+                category: 'crafts',
+                supplier: 'Zulu Craft Collective',
+                origin: 'South Africa',
+                price: 45.00,
+                unit: 'piece',
+                minOrder: 50,
+                description: 'Traditional Zulu beadwork with cultural patterns.',
+                image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+                exportMarkets: ['USA', 'EU'],
+                shipping: 'Air Freight'
+            },
+            {
+                id: 'exp-craft-002',
+                name: 'Ethiopian Silver Cross',
+                category: 'crafts',
+                supplier: 'Addis Ababa Silversmiths',
+                origin: 'Ethiopia',
+                price: 85.00,
+                unit: 'piece',
+                minOrder: 25,
+                description: 'Exquisite silver cross with traditional designs.',
+                image: 'https://images.unsplash.com/photo-1599643478510-a6d8c0570b51?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'USA'],
+                shipping: 'Secure Air'
+            },
+            {
+                id: 'exp-craft-003',
+                name: 'Moroccan Leather Babouche',
+                category: 'crafts',
+                supplier: 'Fes Leather Artisans',
+                origin: 'Morocco',
+                price: 35.00,
+                unit: 'pair',
+                minOrder: 100,
+                description: 'Traditional Moroccan slippers, genuine leather.',
+                image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=300&fit=crop',
+                exportMarkets: ['EU', 'UAE'],
+                shipping: 'Sea Container'
+            }
+        ];
+
         let currentCategory = 'all';
-        
-        function filterProducts(category) {
+        let filteredProducts = [...mobileProducts];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Mobile export products loaded');
+            loadCategories();
+            loadProducts();
+            setupSearch();
+        });
+
+        function loadCategories() {
+            const categoriesContainer = document.getElementById('mobileCategories');
+            const categories = [
+                { id: 'all', name: 'All', icon: '🌍', count: mobileProducts.length },
+                { id: 'wine', name: 'Wine', icon: '🍷', count: mobileProducts.filter(p => p.category === 'wine').length },
+                { id: 'fruits', name: 'Fruits', icon: '🍓', count: mobileProducts.filter(p => p.category === 'fruits').length },
+                { id: 'crafts', name: 'Crafts', icon: '🎨', count: mobileProducts.filter(p => p.category === 'crafts').length }
+            ];
+
+            categoriesContainer.innerHTML = categories.map(cat => `
+                <button class="mobile-category-btn ${cat.id === 'all' ? 'active' : ''}" 
+                        onclick="filterByCategory('${cat.id}')">
+                    ${cat.icon} ${cat.name} (${cat.count})
+                </button>
+            `).join('');
+        }
+
+        function filterByCategory(category) {
             currentCategory = category;
             
-            // Update active category
-            document.querySelectorAll('.category-card').forEach(card => {
-                card.classList.remove('active');
+            // Update active button
+            document.querySelectorAll('.mobile-category-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
-            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            document.querySelector(`[onclick="filterByCategory('${category}')"]`).classList.add('active');
             
-            // Update products title
-            document.getElementById('productsTitle').textContent = 
-                category === 'all' ? 'All Export Products' : 
-                getCategoryName(category) + ' Exports';
+            // Update title
+            const categoryNames = {
+                'all': 'All Products',
+                'wine': 'Wine & Spirits',
+                'fruits': 'Fresh Fruits',
+                'crafts': 'Handicrafts'
+            };
+            document.getElementById('productsTitle').textContent = categoryNames[category];
             
-            // Filter and display products
-            displayProducts();
+            // Filter products
+            if (category === 'all') {
+                filteredProducts = [...mobileProducts];
+            } else {
+                filteredProducts = mobileProducts.filter(product => product.category === category);
+            }
+            
+            loadProducts();
         }
-        
-        function displayProducts() {
-            const container = document.getElementById('productsContainer');
-            
-            if (!window.exportProducts || window.exportProducts.length === 0) {
-                container.innerHTML = '<div class="no-exports">No export products available.</div>';
-                return;
-            }
-            
-            let productsToShow = window.exportProducts;
-            if (currentCategory !== 'all') {
-                productsToShow = window.exportProducts.filter(p => p.category === currentCategory);
-            }
-            
-            if (productsToShow.length === 0) {
-                container.innerHTML = '<div class="no-exports">No products found in this category.</div>';
-                return;
-            }
-            
-            container.innerHTML = productsToShow.map(product => `
-                <div class="export-product-card" data-category="${product.category}">
-                    <div class="export-product-header">
-                        <img src="${product.image}" alt="${product.name}" 
-                             onerror="this.src='https://via.placeholder.com/400x300/1e3c72/FFFFFF?text=Export+Product'">
-                        <div class="export-badges">
-                            ${product.certification ? `<span class="cert-badge">${product.certification.length} Certifications</span>` : ''}
-                            <span class="origin-badge">${product.origin}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="export-product-body">
-                        <div class="product-category-tag">${getCategoryName(product.category)}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-supplier">By: ${product.supplier}</p>
-                        <p class="product-description">${product.description}</p>
-                        
-                        <div class="export-specs">
-                            <div class="spec-item">
-                                <span class="spec-label">💰 Price:</span>
-                                <span class="spec-value">$${product.price}/${product.unit}</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">📦 Min Order:</span>
-                                <span class="spec-value">${product.minOrder} ${product.moqUnit || product.unit + 's'}</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">🌍 Markets:</span>
-                                <span class="spec-value">${product.exportMarkets?.join(', ') || 'Global'}</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">🚢 Shipping:</span>
-                                <span class="spec-value">${product.shipping}</span>
-                            </div>
-                        </div>
 
-                        <div class="export-actions">
-                            <button class="btn-export-primary" onclick="viewProductDetails('${product.id}')">
-                                📋 Export Details
+        function loadProducts() {
+            const productsContainer = document.getElementById('mobileProducts');
+            const productsCount = document.getElementById('productsCount');
+            
+            productsCount.textContent = `${filteredProducts.length} products`;
+            
+            if (filteredProducts.length === 0) {
+                productsContainer.innerHTML = `
+                    <div class="mobile-error">
+                        <div>📭 No products found</div>
+                        <p>Try another category or search term</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            productsContainer.innerHTML = filteredProducts.map(product => `
+                <div class="mobile-product-card">
+                    <img src="${product.image}" alt="${product.name}" class="mobile-product-image"
+                         onerror="this.src='https://via.placeholder.com/400x300/1e3c72/FFFFFF?text=Export+Product'">
+                    <div class="mobile-product-content">
+                        <div class="mobile-product-category">${getCategoryName(product.category)}</div>
+                        <h3 class="mobile-product-title">${product.name}</h3>
+                        <div class="mobile-product-supplier">By: ${product.supplier}</div>
+                        <div class="mobile-product-origin">From: ${product.origin}</div>
+                        <p class="mobile-product-description">${product.description}</p>
+                        
+                        <div class="mobile-product-specs">
+                            <div class="mobile-spec-item">
+                                <span class="mobile-spec-label">Price:</span>
+                                <span class="mobile-spec-value">$${product.price}/${product.unit}</span>
+                            </div>
+                            <div class="mobile-spec-item">
+                                <span class="mobile-spec-label">Min Order:</span>
+                                <span class="mobile-spec-value">${product.minOrder} ${product.moqUnit || product.unit + 's'}</span>
+                            </div>
+                            <div class="mobile-spec-item">
+                                <span class="mobile-spec-label">Shipping:</span>
+                                <span class="mobile-spec-value">${product.shipping}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mobile-product-actions">
+                            <button class="mobile-btn-primary" onclick="viewProductDetails('${product.id}')">
+                                Details
                             </button>
-                            <button class="btn-export-secondary" onclick="contactExporter('${product.id}')">
-                                📞 Contact Exporter
+                            <button class="mobile-btn-secondary" onclick="contactSupplier('${product.id}')">
+                                Contact
                             </button>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
-        
+
         function getCategoryName(category) {
             const names = {
-                'wine': '🍷 Wine & Spirits',
-                'fruits': '🍓 Fresh Fruits', 
-                'crafts': '🎨 Handicrafts',
-                'textiles': '👕 Textiles',
-                'spices': '🌶️ Spices'
+                'wine': '🍷 Wine',
+                'fruits': '🍓 Fruits',
+                'crafts': '🎨 Crafts'
             };
             return names[category] || category;
         }
-        
+
+        function setupSearch() {
+            const searchInput = document.getElementById('mobileSearch');
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase().trim();
+                
+                if (query === '') {
+                    // Reset to current category filter
+                    if (currentCategory === 'all') {
+                        filteredProducts = [...mobileProducts];
+                    } else {
+                        filteredProducts = mobileProducts.filter(p => p.category === currentCategory);
+                    }
+                } else {
+                    // Search across all products in current category
+                    let searchBase = mobileProducts;
+                    if (currentCategory !== 'all') {
+                        searchBase = mobileProducts.filter(p => p.category === currentCategory);
+                    }
+                    
+                    filteredProducts = searchBase.filter(product => 
+                        product.name.toLowerCase().includes(query) ||
+                        product.supplier.toLowerCase().includes(query) ||
+                        product.description.toLowerCase().includes(query) ||
+                        product.origin.toLowerCase().includes(query)
+                    );
+                }
+                
+                loadProducts();
+            });
+        }
+
         function viewProductDetails(productId) {
             window.location.href = `export-product-details.html?id=${productId}`;
         }
-        
-        function contactExporter(productId) {
-            const product = window.exportProducts.find(p => p.id === productId);
+
+        function contactSupplier(productId) {
+            const product = mobileProducts.find(p => p.id === productId);
             if (product) {
-                alert(`Contact Exporter for: ${product.name}\n\nSupplier: ${product.supplier}\nOrigin: ${product.origin}\n\nThis would open a contact form.`);
+                alert(`Contact ${product.supplier}\n\nProduct: ${product.name}\n\nThis would open a contact form.`);
             }
         }
-        
-        // Search functionality
-        document.getElementById('exportSearch').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            const allProducts = window.exportProducts || [];
-            
-            let filteredProducts = allProducts;
-            if (query.trim()) {
-                filteredProducts = allProducts.filter(product => 
-                    product.name.toLowerCase().includes(query) ||
-                    product.supplier.toLowerCase().includes(query) ||
-                    product.description.toLowerCase().includes(query) ||
-                    product.origin.toLowerCase().includes(query)
-                );
-            }
-            
-            // Apply category filter to search results
-            if (currentCategory !== 'all') {
-                filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
-            }
-            
-            const container = document.getElementById('productsContainer');
-            if (filteredProducts.length === 0) {
-                container.innerHTML = '<div class="no-exports">No products found matching your search.</div>';
-            } else {
-                container.innerHTML = filteredProducts.map(product => `
-                    <div class="export-product-card" data-category="${product.category}">
-                        <div class="export-product-header">
-                            <img src="${product.image}" alt="${product.name}" 
-                                 onerror="this.src='https://via.placeholder.com/400x300/1e3c72/FFFFFF?text=Export+Product'">
-                            <div class="export-badges">
-                                ${product.certification ? `<span class="cert-badge">${product.certification.length} Certifications</span>` : ''}
-                                <span class="origin-badge">${product.origin}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="export-product-body">
-                            <div class="product-category-tag">${getCategoryName(product.category)}</div>
-                            <h3 class="product-title">${product.name}</h3>
-                            <p class="product-supplier">By: ${product.supplier}</p>
-                            <p class="product-description">${product.description}</p>
-                            
-                            <div class="export-specs">
-                                <div class="spec-item">
-                                    <span class="spec-label">💰 Price:</span>
-                                    <span class="spec-value">$${product.price}/${product.unit}</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">📦 Min Order:</span>
-                                    <span class="spec-value">${product.minOrder} ${product.moqUnit || product.unit + 's'}</span>
-                                </div>
-                            </div>
-
-                            <div class="export-actions">
-                                <button class="btn-export-primary" onclick="viewProductDetails('${product.id}')">
-                                    📋 Export Details
-                                </button>
-                                <button class="btn-export-secondary" onclick="contactExporter('${product.id}')">
-                                    📞 Contact Exporter
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        });
-        
-        // Load products when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Products page loaded with', (window.exportProducts || []).length, 'products');
-            displayProducts();
-        });
     </script>
 </body>
 </html>
