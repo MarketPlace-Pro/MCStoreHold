@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="modern-styles.css">
     <style>
         /* Header styles */
-        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        header .container { max-width: 1200px; margin: 0 auto; padding: 0.5rem 1rem; }
+header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+header .container { max-width: 1200px; margin: 0 auto; padding: 0.5rem 1rem; }
+.header-content { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.logo h1 { margin: 0; font-size: 1.2rem; }
+.logo h1 a { color: white; text-decoration: none; }
+.logo p { margin: 0; font-size: 0.6rem; color: rgba(255,255,255,0.8); }
+.main-nav { flex: 1; display: flex; justify-content: center; gap: 1rem; }
+.main-nav a { color: white; text-decoration: none; font-size: 0.8rem; font-weight: 500; padding: 0.3rem 0.5rem; border-radius: 0.25rem; transition: all 0.3s ease; }
+.main-nav a:hover, .main-nav a.active { background: rgba(255,255,255,0.15); color: #ffd700; }
+.header-actions { display: flex; align-items: center; gap: 0.5rem; }
         .header-content { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
         .logo h1 { margin: 0; font-size: 1.4rem; }
         .logo h1 a { color: white; text-decoration: none; }
@@ -60,12 +68,12 @@
                     <a href="export-index.html" class="nav-link">🏠 Home</a>
                     <a href="export-products-fixed.html" class="nav-link">📦 Products</a>
                     <a href="supplier-portal.html" class="nav-link">🏭 For Suppliers</a>
-                    <a href="buyer-dashboard-enhanced.html" class="nav-link">🛒 For Buyers</a>
+                    <a href="buyer-dashboard.html" class="nav-link">🛒 For Buyers</a>
                 </nav>
 
                 <div class="header-actions">
                     <span id="cartCount" style="background: #6366f1; color: white; padding: 0.25rem 0.5rem; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: none; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">0</span>
-                    <a href="buyer-dashboard-enhanced.html" class="btn-primary">View Cart</a>
+                    <a href="buyer-dashboard.html" class="btn-primary">View Cart</a>
                 </div>
             </div>
         </div>
@@ -285,13 +293,14 @@
             }, 3000);
         }
         
-        function updateCartDisplay() {
-            const cart = JSON.parse(localStorage.getItem('simple_cart')) || [];
-            const cartCount = document.getElementById('cartCount');
-            if (cartCount) {
-                cartCount.textContent = cart.length;
-                cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
-            }
+function updateCartDisplay() {
+    const cart = JSON.parse(localStorage.getItem("simple_cart")) || [];
+    const cartCount = document.getElementById("cartCount");
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+        cartCount.style.display = cart.length > 0 ? "flex" : "none";
+    }
+}
         }
         
         // Initialize
