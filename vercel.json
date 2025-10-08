@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/export-index.html"
+    },
+    {
+      "src": "/products",
+      "dest": "/export-products.html"
+    },
+    {
+      "src": "/suppliers",
+      "dest": "/supplier-portal.html"
+    },
+    {
+      "src": "/cart",
+      "dest": "/buyer-dashboard.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/export-index.html"
+    }
+  ]
+}
